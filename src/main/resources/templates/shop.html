@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>BookWorld</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <!--  <link rel="stylesheet" href="./responsive.css" />-->
+</head>
+<body>
+<div>
+    <div class="home-navbar">
+        <header data-role="Header" class="home-header max-width-container">
+            <div class="home-navbar1">
+                <div class="home-middle">
+                    <div class="home-left">
+                        <span class="navbar-link">HOME</span>
+                        <span class="navbar-link">SHOP</span>
+                        <span class="navbar-link">ADD BOOK</span>
+                        <span class="navbar-link">ABOUT</span>
+                        <span class="navbar-link">REGISTRATION</span>
+                        <span class="navbar-link">LOGIN</span>
+                        <span class="navbar-link">PROFILE</span>
+                        <span class="navbar-link">LOGOUT</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+    <section class="home-container08">
+        <div class="blog-post-card-blog-post-card">
+            <div th:each="singleBook : ${allBooks}">
+                <img th:src="${singleBook.imageUrl}" alt="Title image" class="blog-post-card-image">
+                <div>
+                    <h2 th:text="${singleBook.name}"></h2>
+                    <p th:text="${singleBook.author}"></p>
+                    <a href="/" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
