@@ -17,7 +17,7 @@ public class Author {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    public Author(){
+    public Author() {
 
     }
 

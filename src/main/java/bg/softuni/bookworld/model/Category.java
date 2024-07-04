@@ -14,7 +14,7 @@ public class Category {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    public Category(){
+    public Category() {
 
     }
 

@@ -27,8 +27,8 @@ public class BookService {
     }
 
     @Transactional
-    public List<BookShortInfoDTO> getAll(){
-       return bookRepository.findAll()
+    public List<BookShortInfoDTO> getAll() {
+        return bookRepository.findAll()
                 .stream()
                 .map(this::mapToShortInfo)
                 .toList();
@@ -36,7 +36,7 @@ public class BookService {
     }
 
     @Transactional
-    public BookShortInfoDTO getRandomBook(){
+    public BookShortInfoDTO getRandomBook() {
         long booksCount = bookRepository.count();
         long randomId = random.nextLong(booksCount) + 1;
 

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/head"></head>
+
+<body>
+<div>
+    <div class="home-container">
+        <div class="home-navbar" th:replace="fragments/header"></div>
+        <div>
+            <h1>Login</h1>
+            <form
+                    th:action="@{/users/login}"
+                    th:method="POST"
+                    th:object="${loginData}"
+            >
+                <div>
+                    <div>
+                        <label for="inputUsername">Username</label>
+                    </div>
+                    <div>
+                        <input
+                                th:field="*{username}"
+                                name="username"
+                                required minlength="5" maxlength="20"
+                                type="text"
+                                id="inputUsername">
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label for="inputPassword">Password</label>
+                    </div>
+                    <div>
+                        <input
+                                th:field="*{password}"
+                                name="password"
+                                required minlength="5" maxlength="20"
+                                type="password"
+                                id="inputPassword">
+                    </div>
+                </div>
+                <div>
+                    <button class="button" type="submit">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

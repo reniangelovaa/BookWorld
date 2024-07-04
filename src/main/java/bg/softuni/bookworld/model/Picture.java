@@ -13,7 +13,8 @@ public class Picture {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
 
-    public Picture(){ }
+    public Picture() {
+    }
 
     public long getId() {
         return id;

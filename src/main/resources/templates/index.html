@@ -1,167 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>BookWorld</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta charset="utf-8" />
-  <link rel="stylesheet" href="/css/style.css" />
-<!--  <link rel="stylesheet" href="./responsive.css" />-->
-</head>
+<head th:replace="fragments/head"></head>
 
 <body>
-  <div>
+<div>
     <div class="home-container">
-      <div class="home-navbar">
-        <header data-role="Header" class="home-header max-width-container">
-          <div class="home-navbar1">
-            <div class="home-middle">
-              <div class="home-left">
-                <span class="navbar-link">HOME</span>
-                <span class="navbar-link">SHOP</span>
-                <span class="navbar-link">ADD BOOK</span>
-                <span class="navbar-link">ABOUT</span>
-                <span class="navbar-link">REGISTRATION</span>
-                <span class="navbar-link">LOGIN</span>
-                <span class="navbar-link">PROFILE</span>
-                <span class="navbar-link">LOGOUT</span>
-              </div>
-            </div>
-          </div>
-        </header>
-      </div>
-      <div class="home-main">
-        <div class="section-container column">
-          <div class="max-width-container">
-            <div class="section-heading-section-heading">
-              <h1 class="section-heading-text Heading-2">
-                <span>SHOP BY CATEGORIES</span>
-              </h1>
-              <span class="section-heading-text1">
+        <div class="home-navbar" th:replace="fragments/header"></div>
+        <div class="home-main">
+            <div class="section-container column">
+                <div class="max-width-container">
+                    <div class="section-heading-section-heading">
+                        <h1 class="section-heading-text Heading-2">
+                            <span>SHOP BY CATEGORIES</span>
+                        </h1>
+                        <span class="section-heading-text1">
                 <span>
                   Start shopping based on the categories you are interested in
                 </span>
               </span>
-            </div>
-            <div class="home-cards-container">
-              <div class="category-card-category-card">
-                <img alt="image" src="/images/fantasy-book.jpg" class="category-card-image" />
-                <span class="category-card-text"><span>Fantasy</span></span>
-              </div>
-              <div class="category-card-category-card">
-                <img alt="image" src="/images/thriller-book.jpg" class="category-card-image" />
-                <span class="category-card-text"><span>Thriller</span></span>
-              </div>
-              <div class="category-card-category-card">
-                <img alt="image" src="/images/romance-book.jpg" class="category-card-image" />
-                <span class="category-card-text"><span>Romance</span></span>
-              </div>
-              <div class="category-card-category-card">
-                <img alt="image" src="/images/horror-book.jpg" class="category-card-image" />
-                <span class="category-card-text"><span>Horror</span></span>
-              </div>
-              <div class="category-card-category-card">
-                <img alt="image" src="/images/historic-book.jpg" class="category-card-image" />
-                <span class="category-card-text"><span>History</span></span>
-              </div>
-              <div class="category-card-category-card">
-                <img alt="image" src="/images/children-book.jpg" class="category-card-image" />
-                <span class="category-card-text">
+                    </div>
+                    <div class="home-cards-container">
+                        <div class="category-card-category-card">
+                            <img alt="image" src="/images/fantasy-book.jpg" class="category-card-image"/>
+                            <span class="category-card-text"><span>Fantasy</span></span>
+                        </div>
+                        <div class="category-card-category-card">
+                            <img alt="image" src="/images/thriller-book.jpg" class="category-card-image"/>
+                            <span class="category-card-text"><span>Thriller</span></span>
+                        </div>
+                        <div class="category-card-category-card">
+                            <img alt="image" src="/images/romance-book.jpg" class="category-card-image"/>
+                            <span class="category-card-text"><span>Romance</span></span>
+                        </div>
+                        <div class="category-card-category-card">
+                            <img alt="image" src="/images/horror-book.jpg" class="category-card-image"/>
+                            <span class="category-card-text"><span>Horror</span></span>
+                        </div>
+                        <div class="category-card-category-card">
+                            <img alt="image" src="/images/historic-book.jpg" class="category-card-image"/>
+                            <span class="category-card-text"><span>History</span></span>
+                        </div>
+                        <div class="category-card-category-card">
+                            <img alt="image" src="/images/children-book.jpg" class="category-card-image"/>
+                            <span class="category-card-text">
                   <span>Children</span>
                 </span>
-              </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
-        <div class="home-full-width-banner section-container">
-          <div class="home-left4">
-            <div class="home-content">
-              <span class="home-text29">BookStore</span>
-              <span class="home-text30">
+            <div class="home-full-width-banner section-container">
+                <div class="home-left4">
+                    <div class="home-content">
+                        <span class="home-text29">BookStore</span>
+                        <span class="home-text30">
                 Are you sick of boring days? Come and join us in the amazing journey of reading! Here you can find everything from old classics to the newest and most popular books.
               </span>
+                    </div>
+                    <div class="home-btn button">
+                        <a href="/shop" class="home-text31">Shop now</a>
+                    </div>
+                </div>
+                <img alt="Rectangle13271410" src="./images/bookstore.jpg" class="home-image6"/>
             </div>
-            <div class="home-btn button">
-              <span class="home-text31">Show now</span>
-            </div>
-          </div>
-          <img alt="Rectangle13271410" src="./images/bookstore.jpg" class="home-image6" />
-        </div>
-        <div class="section-container">
-          <div class="max-width-container">
-            <div class="section-heading-section-heading section-heading-root-class-name">
-              <h1 class="section-heading-text Heading-2">
-                <span>Our store</span>
-              </h1>
-              <span class="section-heading-text1">
+            <div class="section-container">
+                <div class="max-width-container">
+                    <div class="section-heading-section-heading section-heading-root-class-name">
+                        <h1 class="section-heading-text Heading-2">
+                            <span>Our store</span>
+                        </h1>
+                        <span class="section-heading-text1">
                 <span>
                   Read the last books
                 </span>
               </span>
-            </div>
-            <div class="home-container08">
-              <div class="blog-post-card-blog-post-card blog-post-card-root-class-name">
-                <img alt="image" th:src="${book.imageUrl}" class="blog-post-card-image" />
-                <div class="blog-post-card-container">
+                    </div>
+                    <div class="home-container08">
+                        <div class="blog-post-card-blog-post-card blog-post-card-root-class-name">
+                            <img alt="image" th:src="${book.imageUrl}" class="blog-post-card-image"/>
+                            <div class="blog-post-card-container">
                   <span class="blog-post-card-text">
                     <span th:text="${book.name}"></span>
                   </span>
-                  <span class="blog-post-card-text1">
+                                <span class="blog-post-card-text1">
                     <span th:text="${book.author}">
                     </span>
                   </span>
-                  <a href="#" class="button">
-                    Read more
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img alt="image" th:src="${secondBook.imageUrl}" class="blog-post-card-image" />
-                <div class="blog-post-card-container">
+                                <a href="#" class="button">
+                                    Read more
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog-post-card-blog-post-card">
+                            <img alt="image" th:src="${secondBook.imageUrl}" class="blog-post-card-image"/>
+                            <div class="blog-post-card-container">
                   <span class="blog-post-card-text">
                     <span th:text="${secondBook.name}"></span>
                   </span>
-                  <span class="blog-post-card-text1">
+                                <span class="blog-post-card-text1">
                     <span th:text="${secondBook.author}"></span>
                   </span>
-                  <a href="#" class="button">
-                    Read more
-                  </a>
-                </div>
-              </div>
-              <div class="blog-post-card-blog-post-card">
-                <img alt="image" th:src="${thirdBook.imageUrl}" class="blog-post-card-image" />
-                <div class="blog-post-card-container">
+                                <a href="#" class="button">
+                                    Read more
+                                </a>
+                            </div>
+                        </div>
+                        <div class="blog-post-card-blog-post-card">
+                            <img alt="image" th:src="${thirdBook.imageUrl}" class="blog-post-card-image"/>
+                            <div class="blog-post-card-container">
                   <span class="blog-post-card-text">
                     <span th:text="${thirdBook.name}"></span>
                   </span>
-                  <span class="blog-post-card-text1">
+                                <span class="blog-post-card-text1">
                     <span th:text="${thirdBook.author}">
                     </span>
                   </span>
-                  <a href="#" class="button">
-                    Read more
-                  </a>
+                                <a href="#" class="button">
+                                    Read more
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
-      <div class="home-footer">
-        <div class="max-width-container">
-          <footer class="home-footer1">
-            <div class="home-container09">
-              <span class="home-text33">
-                <span>All rights reserved!</span>
-                <br />
-              </span>
-            </div>
-          </footer>
-        </div>
-      </div>
+        <div class="home-footer" th:replace="fragments/footer"></div>
     </div>
-  </div>
+</div>
 </body>
 
 </html>

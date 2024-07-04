@@ -6,7 +6,7 @@ public class BookShortInfoDTO {
     private String author;
     private String imageUrl;
 
-    public BookShortInfoDTO(){
+    public BookShortInfoDTO() {
 
     }
 

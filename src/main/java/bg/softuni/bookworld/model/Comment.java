@@ -21,7 +21,7 @@ public class Comment {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Book book;
 
-    public Comment(){
+    public Comment() {
 
     }
 

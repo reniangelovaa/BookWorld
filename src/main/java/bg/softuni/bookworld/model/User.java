@@ -19,10 +19,10 @@ public class User {
     private String password;
     @Column(nullable = false, unique = true)
     private String email;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User(){
+    public User() {
         this.roles = new HashSet<>();
     }
 

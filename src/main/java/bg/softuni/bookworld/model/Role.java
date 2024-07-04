@@ -12,7 +12,7 @@ public class Role {
     @Enumerated(EnumType.STRING)
     private RoleType role;
 
-    public Role(){
+    public Role() {
 
     }
 

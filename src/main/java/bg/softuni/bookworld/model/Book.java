@@ -2,6 +2,7 @@ package bg.softuni.bookworld.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -15,8 +16,8 @@ public class Book {
     private String name;
     @Column(name = "number_of_pages", nullable = false)
     private Integer numberOfPages;
-    @Column(name = "year_of_release", nullable = false)
-    private Integer yearOfRelease;
+    @Column(name = "release_date", nullable = false)
+    private LocalDate releaseDate;
     @Column(nullable = false)
     private Integer copies;
     @Column(columnDefinition = "TEXT")
@@ -30,7 +31,7 @@ public class Book {
     @OneToMany(targetEntity = Picture.class, mappedBy = "book")
     private Set<Picture> pictures;
 
-    public Book(){
+    public Book() {
         this.categories = new HashSet<>();
         this.comments = new HashSet<>();
         this.pictures = new HashSet<>();
@@ -60,12 +61,12 @@ public class Book {
         this.numberOfPages = numberOfPages;
     }
 
-    public Integer getYearOfRelease() {
-        return yearOfRelease;
+    public LocalDate getReleaseDate() {
+        return releaseDate;
     }
 
-    public void setYearOfRelease(Integer yearOfRelease) {
-        this.yearOfRelease = yearOfRelease;
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
     }
 
     public Integer getCopies() {
