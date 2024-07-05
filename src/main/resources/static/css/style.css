@@ -486,8 +486,11 @@ body {
     text-transform: uppercase;
     text-decoration: none;
 }
-#add-book-form {
+.add-book-form {
+    border-width: 2px !important;
     border-radius: 10px;
-    background: rgba(0, 0, 0, 0.8);
     padding: 2rem;
+}
+.input{
+    border-width: 2px;
 }

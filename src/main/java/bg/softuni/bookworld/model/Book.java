@@ -16,6 +16,8 @@ public class Book {
     private String name;
     @Column(name = "number_of_pages", nullable = false)
     private Integer numberOfPages;
+    @Column(nullable = false)
+    private Double price;
     @Column(name = "release_date", nullable = false)
     private LocalDate releaseDate;
     @Column(nullable = false)
@@ -59,6 +61,14 @@ public class Book {
 
     public void setNumberOfPages(Integer numberOfPages) {
         this.numberOfPages = numberOfPages;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public LocalDate getReleaseDate() {

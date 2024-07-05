@@ -4,6 +4,7 @@ import bg.softuni.bookworld.data.BookRepository;
 import bg.softuni.bookworld.model.Book;
 import bg.softuni.bookworld.model.Picture;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
+import bg.softuni.bookworld.web.dto.AddBookDTO;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -54,5 +55,11 @@ public class BookService {
         dto.setAuthor(authorName);
 
         return dto;
+    }
+
+
+    public boolean add(AddBookDTO data) {
+        Book toInsert = modelMapper.map(data, Book.class);
+        return false;
     }
 }

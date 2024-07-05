@@ -1,4 +1,4 @@
-package bg.softuni.bookworld.service.dto;
+package bg.softuni.bookworld.web.dto;
 
 
 import java.time.LocalDate;
@@ -7,9 +7,14 @@ public class AddBookDTO {
     private String name;
     private String author;
     private String description;
+    private Double price;
     private Integer numberOfPages;
     private LocalDate releaseDate;
     private String imageUrl;
+
+    public AddBookDTO(){
+
+    }
 
     public String getName() {
         return name;
@@ -33,6 +38,14 @@ public class AddBookDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Integer getNumberOfPages() {

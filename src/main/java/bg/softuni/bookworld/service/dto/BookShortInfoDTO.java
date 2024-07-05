@@ -4,6 +4,7 @@ public class BookShortInfoDTO {
     private long id;
     private String name;
     private String author;
+    private Double price;
     private String imageUrl;
 
     public BookShortInfoDTO() {
@@ -32,6 +33,14 @@ public class BookShortInfoDTO {
 
     public void setAuthor(String author) {
         this.author = author;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public String getImageUrl() {
