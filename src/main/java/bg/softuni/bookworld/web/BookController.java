@@ -56,4 +56,5 @@ public class BookController {
         bookService.add(data);
         return "redirect:/add-book";
     }
+
 }

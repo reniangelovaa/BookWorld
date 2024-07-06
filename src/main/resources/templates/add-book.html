@@ -17,28 +17,28 @@
                 <div>
                     <label for="inputName">Name</label>
                 </div>
-                <div>
+                <div class="input-wrapper">
                     <input name="name"
                            class="input"
                            required minlength="2" maxlength="50"
                            type="text"
                            id="inputName"
                            th:field="*{name}">
-                    <small id="inputNameError">Name length must be more than 2 characters</small>
+                    <small class="input-error" id="inputNameError">Name length must be more than 2 characters</small>
                 </div>
             </div>
             <div>
                 <div>
                     <label for="inputAuthor">Author</label>
                 </div>
-                <div>
+                <div class="input-wrapper">
                     <input name="authorName"
                            class="input"
                            required minlength="2" maxlength="50"
                            type="text"
                            id="inputAuthor"
                            th:field="*{author}">
-                    <small id="inputAuthorNameError">Author name length must be more than 2 characters</small>
+                    <small class="input-error" id="inputAuthorNameError">Author name length must be more than 2 characters</small>
                 </div>
             </div>
 
@@ -46,20 +46,20 @@
                 <div>
                     <label for="inputDescription">Description</label>
                 </div>
-                <div>
+                <div class="input-wrapper">
                     <textarea name="description"
                               class="input"
                               required minlength="5"
                               id="inputDescription"
                               th:field="*{description}"></textarea>
-                    <small id="inputDescriptionError">Description length must be more than 5 characters</small>
+                    <small class="input-error" id="inputDescriptionError">Description length must be more than 5 characters</small>
                 </div>
             </div>
             <div>
                 <div>
                     <label for="inputPrice">Price</label>
                 </div>
-                <div>
+                <div class="input-wrapper">
                     <input name="price"
                            class="input"
                            required
@@ -72,7 +72,7 @@
                 <div>
                     <label for="inputNumberOfPages">Number of pages</label>
                 </div>
-                <div>
+                <div class="input-wrapper">
                     <input name="numberOfPages"
                            class="input"
                            required
@@ -85,7 +85,7 @@
                 <div>
                     <label for="inputReleaseDate">Release date</label>
                 </div>
-                <div>
+                <div class="input-wrapper">
                     <input name="releaseDate"
                            class="input"
                            required
@@ -96,7 +96,7 @@
             </div>
 
             <div>
-                <div>
+                <div class="input-wrapper">
                     <label for="imageUrl">Image URL</label>
                     <input id="imageUrl" class="input" type="text"
                            th:field="*{imageUrl}">
@@ -104,18 +104,21 @@
             </div>
 
             <div>
-                <div>
+                <div class="input-wrapper">
                     <label for="categories">Categories:</label>
+
+                    <div class="categories-wrapper">
                     <input th:each="category: ${categoryTypes}"
                            type="checkbox"
                            name="categories"
                            id="categories"
                            th:value="${category}" th:text="${category}">
+                    </div>
                 </div>
             </div>
 
-            <div class="button">
-                <button class="home-text31" type="submit">Add Book</button>
+            <div class="input-wrapper">
+                <button class="button" type="submit">Add Book</button>
             </div>
         </form>
     </div>

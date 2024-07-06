@@ -10,6 +10,7 @@
         <div>
             <h1>Login</h1>
             <form
+                    class="register-form"
                     th:action="@{/users/login}"
                     th:method="POST"
                     th:object="${loginData}"
@@ -18,26 +19,28 @@
                     <div>
                         <label for="inputUsername">Username</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{username}"
                                 name="username"
                                 required minlength="5" maxlength="20"
                                 type="text"
                                 id="inputUsername">
+                        <small class="input-error" id="usernameError">Username length must be more than 5 characters.</small>
                     </div>
                 </div>
                 <div>
                     <div>
                         <label for="inputPassword">Password</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{password}"
                                 name="password"
                                 required minlength="5" maxlength="20"
                                 type="password"
                                 id="inputPassword">
+                        <small class="input-error" id="passwordError">Username length must be more than 5 characters.</small>
                     </div>
                 </div>
                 <div>

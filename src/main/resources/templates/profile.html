@@ -5,15 +5,27 @@
 <body>
 <div class="home-container">
     <div th:replace="fragments/header"></div>
-    <div class="home-container07">
-        <h4>Full name</h4>
-        <span th:text="${profileData.fullName}"></span>
-        <h4>Username</h4>
-        <span th:text="${profileData.username}"></span>
-        <h4>Email</h4>
-        <span th:text="${profileData.email}"></span>
-        <div class="button">
-            <a class="home-text31" th:href="@{/}">Back</a>
+    <!--    <div class="home-container07">-->
+    <!--        <h4>Full name</h4>-->
+    <!--        <span th:text="${profileData.fullName}"></span>-->
+    <!--        <h4>Username</h4>-->
+    <!--        <span th:text="${profileData.username}"></span>-->
+    <!--        <h4>Email</h4>-->
+    <!--        <span th:text="${profileData.email}"></span>-->
+    <!--        <div class="button">-->
+    <!--            <a class="home-text31" th:href="@{/}">Back</a>-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <div class="profile">
+        <div class="profile-container">
+            <div class="profile-image">
+                <img src="/images/blank-profile-picture.jpg" alt="Profile Image">
+            </div>
+            <div class="profile-details">
+                <h1 class="profile-name" th:text="${profileData.fullName}"></h1>
+                Email: <p class="profile-email" th:text=" ${profileData.email}"></p>
+                Username: <p class="profile-email" th:text="${profileData.username}"> </p>
+            </div>
         </div>
     </div>
     <div th:replace="fragments/footer"></div>

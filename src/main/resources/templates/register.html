@@ -10,6 +10,7 @@
         <div>
             <h1>Registration</h1>
             <form
+                    class="register-form"
                     th:object="${registerData}"
                     th:action="@{/users/register}"
                     th:method="POST"
@@ -18,7 +19,7 @@
                     <div>
                         <label for="inputUsername">Username</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{username}"
                                 th:errorclass="is_invalid"
@@ -26,8 +27,8 @@
                                 required minlength="5" maxlength="20"
                                 type="text"
                                 id="inputUsername">
-                        <small id="usernameError">Username length must be more than 5 characters.</small>
-                        <small th:if="${#fields.hasErrors('username')}" id="usernameUniqueError">Username is already
+                            <small class="input-error" id="usernameError">Username length must be more than 5 characters.</small>
+                        <small class="input-error"  th:if="${#fields.hasErrors('username')}" id="usernameUniqueError">Username is already
                             occupied.</small>
                     </div>
                 </div>
@@ -35,7 +36,7 @@
                     <div>
                         <label for="inputFullName">Full Name</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{fullName}"
                                 th:errorclass="is_invalid"
@@ -43,28 +44,28 @@
                                 required minlength="5" maxlength="50"
                                 type="text"
                                 id="inputFullName">
-                        <small id="fullNameError">Full Name must be more than 5 characters.</small>
+                        <small class="input-error"  id="fullNameError">Full Name must be more than 5 characters.</small>
                     </div>
                 </div>
                 <div>
                     <div>
                         <label for="inputEmail">Email</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{email}"
                                 th:errorclass="is_invalid"
                                 name="email"
                                 type="email"
                                 id="inputEmail">
-                        <small id="emailError">Must be a valid email!</small>
+                        <small class="input-error"  id="emailError">Must be a valid email!</small>
                     </div>
                 </div>
                 <div>
                     <div>
                         <label for="inputPassword">Password</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{password}"
                                 th:errorclass="is_invalid"
@@ -72,14 +73,14 @@
                                 required minlength="5" maxlength="20"
                                 type="password"
                                 id="inputPassword">
-                        <small id="passwordError">Password must be between 5 and 20 characters.</small>
+                        <small class="input-error"  id="passwordError">Password must be between 5 and 20 characters.</small>
                     </div>
                 </div>
                 <div>
                     <div>
                         <label for="inputConfirmPassword">Confirm Password</label>
                     </div>
-                    <div>
+                    <div class="input-wrapper">
                         <input
                                 th:field="*{confirmPassword}"
                                 th:errorclass="is_invalid"
@@ -87,7 +88,7 @@
                                 required minlength="5" maxlength="20"
                                 type="password"
                                 id="inputConfirmPassword">
-                        <small id="confirmPasswordError">Passwords should match!</small>
+                        <small class="input-error"  id="confirmPasswordError">Passwords should match!</small>
                     </div>
                 </div>
                 <div>

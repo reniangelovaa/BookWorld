@@ -1,7 +1,5 @@
-@import url(https://fonts.googleapis.com/css2?family=Kalam);
-
 body {
-    font-family: 'Kalam';
+    font-family: 'Arial', sans-serif;
     font-weight: 400;
     font-style: normal;
     text-decoration: none;
@@ -110,6 +108,7 @@ body {
     align-items: center;
     padding-top: 70px;
     flex-direction: column;
+
 }
 
 .home-navbar {
@@ -139,6 +138,7 @@ body {
 }
 
 .about-us {
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     padding: 5px;
@@ -189,6 +189,9 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+.home-container09 home-text33 {
+    padding-top: 0px;
 }
 
 .home-container07 {
@@ -342,15 +345,17 @@ body {
 .home-footer1 {
     width: 100%;
     display: flex;
+    justify-content: center;
     max-width: 1328px;
     align-items: center;
-    padding-top: 96px;
+    /*padding-top: 96px;*/
     flex-direction: row;
-    padding-bottom: 96px;
+    /*padding-bottom: 96px;*/
     justify-content: space-between;
 }
 
 .home-container09 {
+    width: 100%;
     display: flex;
     max-width: 1328px;
     align-items: center;
@@ -413,6 +418,7 @@ body {
 
 .button {
     color: #000000cc;
+    font-weight: bold;
     cursor: pointer;
     display: flex;
     padding: 0.5rem 1rem;
@@ -422,7 +428,7 @@ body {
     transition: 0.3s;
     align-items: flex-start;
     flex-shrink: 1;
-    font-weight: 500;
+    /*font-weight: 500;*/
     line-height: 14px;
     padding-top: 12px;
     border-color: #00000080;
@@ -434,6 +440,7 @@ body {
     padding-bottom: 12px;
     text-decoration: none;
     background-color: #c1f0c1;
+    justify-content: center;
 }
 
 .section-container {
@@ -490,7 +497,179 @@ body {
     border-width: 2px !important;
     border-radius: 10px;
     padding: 2rem;
+    max-width: 600px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
+.add-book-form h3 {
+    text-align: center;
+}
+
+.add-book-form form {
+    width: auto;
+}
+
 .input{
     border-width: 2px;
+}
+.categories{
+    display: flex;
+    flex-direction: row;
+}
+
+.register-form input {
+    border: solid black 1px;
+}
+
+.home-container h1 {
+    text-align: center;
+}
+
+.input-error {
+    color: red;
+}
+
+.input-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    text-align: center;
+    font-family: arial;
+}
+
+.price {
+    color: grey;
+    font-size: 22px;
+}
+
+.card a {
+    text-decoration: none;
+    border: none;
+    outline: 0;
+    padding: 12px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+}
+
+.card a:hover {
+    opacity: 0.7;
+}
+
+.shop-page {
+    max-width: 1200px!important;
+}
+
+.collection {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px; /* Adjust the gap between items as needed */
+    padding: 20px; /* Adjust the padding around the collection as needed */
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 768px) {
+    .collection {
+        grid-template-columns: repeat(2, 1fr); /* 2 items per row on tablets */
+    }
+}
+
+@media (min-width: 1024px) {
+    .collection {
+        grid-template-columns: repeat(3, 1fr); /* 3 items per row on desktops */
+    }
+}
+
+/* Styles for individual items */
+.item {
+    background-color: #f0f0f0; /* Example background color */
+    padding: 20px; /* Example padding */
+    border: 1px solid #ddd; /* Example border */
+    border-radius: 8px; /* Example border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow */
+}
+
+/* General styles for the profile container */
+.profile {
+    height: calc(100vh - 117px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+}
+
+/* Styles for the profile image */
+.profile-image img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+}
+
+/* Styles for the profile details */
+.profile-details {
+    text-align: center;
+}
+
+.profile-name {
+    font-size: 24px;
+    margin: 0;
+}
+
+.profile-email {
+    font-size: 16px;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 768px) {
+    .profile-container {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+
+    .profile-image {
+        margin-right: 20px;
+    }
+
+    .profile-details {
+        text-align: left;
+    }
+
+    .profile-name {
+        font-size: 28px;
+    }
+
+    .profile-email {
+        font-size: 18px;
+    }
+}
+
+.categories-wrapper {
+    width: 100%;
+    flex-flow: wrap;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
 }
