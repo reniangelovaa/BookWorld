@@ -1,13 +1,11 @@
 package bg.softuni.bookworld.data;
 
+import bg.softuni.bookworld.model.ShoppingCart;
 import bg.softuni.bookworld.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    Optional<User> findByUsername(String username);
-
+public interface ShoppingCartRepository extends JpaRepository<ShoppingCart, Long> {
+    ShoppingCart findByUser(User user);
 }

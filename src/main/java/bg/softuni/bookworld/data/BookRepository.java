@@ -11,9 +11,5 @@ import java.util.Optional;
 
 @Repository
 public interface BookRepository extends JpaRepository<Book, Long> {
-//    @Query( "FROM books b " +
-//            "JOIN books_categories bc ON b.id = bc.book_id " +
-//            "JOIN categories c ON bc.category_id = c.id " +
-//            "WHERE c.categoryName = ?")
-//    List<Book> findAllByCategory(String categoryName);
+
 }

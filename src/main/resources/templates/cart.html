@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head th:replace="fragments/head"></head>
+<body>
+<header th:replace="fragments/header"></header>
+<div class="shopping-cart-container">
+    <h1>Your Shopping Cart</h1>
+    <div th:if="${cart != null}">
+        <table>
+            <thead>
+            <tr>
+                <th>Book</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${cart.cartItems}">
+                <td th:text="${item.book.title}">Book Title</td>
+                <td th:text="${item.quantity}">Quantity</td>
+                <td th:text="${item.book.price}">Price</td>
+                <td th:text="${item.quantity * item.book.price}">Total</td>
+                <td>
+                    <form th:action="@{/api/cart/remove/{id}(id=${item.id})}" method="delete">
+                        <button type="submit">Remove</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div th:if="${cart == null}">
+        <p>Your cart is empty.</p>
+    </div>
+</div>
+</body>
+</html>
