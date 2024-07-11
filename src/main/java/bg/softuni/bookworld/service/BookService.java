@@ -6,24 +6,20 @@ import bg.softuni.bookworld.model.Picture;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import bg.softuni.bookworld.web.dto.AddBookDTO;
 import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
+@RequiredArgsConstructor
 public class BookService {
 
-    private BookRepository bookRepository;
-    private Random random;
+    private final BookRepository bookRepository;
+    private final Random random = new Random();
+    private final ModelMapper modelMapper;
 
-    private ModelMapper modelMapper;
-
-    public BookService(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-        this.modelMapper = new ModelMapper();
-        this.random = new Random();
-    }
 
     @Transactional
     public List<BookShortInfoDTO> getAll() {

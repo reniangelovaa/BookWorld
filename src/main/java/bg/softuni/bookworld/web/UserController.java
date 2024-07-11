@@ -4,6 +4,7 @@ import bg.softuni.bookworld.service.UserService;
 import bg.softuni.bookworld.web.dto.UserLoginDTO;
 import bg.softuni.bookworld.web.dto.UserRegisterDTO;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,13 +14,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("users/register")
     public String viewRegister(Model model) {
@@ -28,7 +27,7 @@ public class UserController {
     }
 
     @PostMapping("users/register")
-    public String doRegister(@Valid UserRegisterDTO data, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String doRegister(UserRegisterDTO data, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
 //        if (bindingResult.hasErrors()){
 //            redirectAttributes.addFlashAttribute("registerData", data);
 //            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.UserRegisterDTO", bindingResult);

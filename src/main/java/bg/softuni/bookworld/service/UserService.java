@@ -5,11 +5,13 @@ import bg.softuni.bookworld.model.User;
 import bg.softuni.bookworld.service.dto.UserProfileDTO;
 import bg.softuni.bookworld.web.dto.UserLoginDTO;
 import bg.softuni.bookworld.web.dto.UserRegisterDTO;
+import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
@@ -17,12 +19,6 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final UserHelperService userHelperService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, ModelMapper modelMapper, UserHelperService userHelperService) {
-        this.userRepository = userRepository;
-        this.passwordEncoder = passwordEncoder;
-        this.modelMapper = modelMapper;
-        this.userHelperService = userHelperService;
-    }
 
     public void register(UserRegisterDTO userRegisterDTO) {
         User user = this.modelMapper.map(userRegisterDTO, User.class);

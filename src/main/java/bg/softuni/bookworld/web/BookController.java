@@ -5,6 +5,7 @@ import bg.softuni.bookworld.service.BookService;
 import bg.softuni.bookworld.web.dto.AddBookDTO;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,13 +21,11 @@ import java.io.IOException;
 import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class BookController {
 
-    private BookService bookService;
+    private final BookService bookService;
 
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @GetMapping("/shop")
     public String shop(Model model) {
