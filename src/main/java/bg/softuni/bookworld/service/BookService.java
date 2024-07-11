@@ -9,9 +9,7 @@ import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class BookService {
@@ -33,8 +31,15 @@ public class BookService {
                 .stream()
                 .map(this::mapToShortInfo)
                 .toList();
-
     }
+
+//    @Transactional
+//    public List<BookShortInfoDTO> getByCategory(String category){
+//        return bookRepository.findAllByCategory(category)
+//                .stream()
+//                .map(this::mapToShortInfo)
+//                .toList();
+//    }
 
     @Transactional
     public BookShortInfoDTO getRandomBook() {
@@ -44,6 +49,21 @@ public class BookService {
         Optional<Book> book = bookRepository.findById(randomId);
 
         return mapToShortInfo(book.get());
+    }
+    @Transactional
+    public List<BookShortInfoDTO> getThreeUniqueRandomBooks() {
+        Set<Long> selectedBookIds = new HashSet<>();
+        List<BookShortInfoDTO> uniqueBooks = new ArrayList<>();
+
+        while (uniqueBooks.size() < 3) {
+            BookShortInfoDTO randomBook = getRandomBook();
+            if (!selectedBookIds.contains(randomBook.getId())) {
+                selectedBookIds.add(randomBook.getId());
+                uniqueBooks.add(randomBook);
+            }
+        }
+
+        return uniqueBooks;
     }
 
 
@@ -60,6 +80,7 @@ public class BookService {
 
     public boolean add(AddBookDTO data) {
         Book toInsert = modelMapper.map(data, Book.class);
+
         return false;
     }
 }

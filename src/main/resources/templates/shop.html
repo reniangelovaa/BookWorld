@@ -8,7 +8,7 @@
     <section class="collection">
         <div class="item card" th:each="singleBook : ${allBooks}">
 
-            <img th:src="${singleBook.imageUrl}" alt="Denim Jeans" style="width:100%">
+            <img th:src="${singleBook.imageUrl}" alt="Book Cover" class="blog-post-card-image">
             <h2 th:text="${singleBook.name}"></h2>
             <p th:text="${singleBook.author}"></p>
             <p class="price" th:text="${singleBook.price}"></p>

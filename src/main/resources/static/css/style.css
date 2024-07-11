@@ -68,7 +68,8 @@ body {
 .blog-post-card-image {
     flex: 1;
     width: 100%;
-    object-fit: cover;
+    /*object-fit: cover;*/
+    height: 500px;
 }
 
 .blog-post-card-container {
@@ -594,6 +595,9 @@ body {
     border: 1px solid #ddd; /* Example border */
     border-radius: 8px; /* Example border radius */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example box shadow */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 /* General styles for the profile container */

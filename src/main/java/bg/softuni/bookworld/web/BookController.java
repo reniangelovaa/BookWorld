@@ -35,6 +35,12 @@ public class BookController {
         return "shop";
     }
 
+//    @GetMapping("/shop/fantasy")
+//    public String fantasy(Model model){
+//        List<BookShortInfoDTO> books = bookService.getByCategory("FANTASY");
+//        return "fantasy";
+//    }
+
     @GetMapping("/add-book")
     public ModelAndView addBook(){
         ModelAndView modelAndView = new ModelAndView("add-book");
@@ -49,7 +55,7 @@ public class BookController {
     }
 
     @PostMapping("/add-book")
-    public String doAddRoute(@Valid AddBookDTO data,
+    public String doAddBook(@Valid AddBookDTO data,
                              BindingResult bindingResult,
                              RedirectAttributes redirectAttributes){
 

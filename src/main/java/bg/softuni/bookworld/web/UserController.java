@@ -47,21 +47,18 @@ public class UserController {
         return modelAndView;
     }
 
-    @PostMapping("/users/login")
-    public String login(UserLoginDTO loginData) {
-        userService.login(loginData);
 
-        return "redirect:/";
+    @GetMapping("users/login-error")
+    public ModelAndView viewLoginError() {
+        ModelAndView modelAndView = new ModelAndView("login");
+        modelAndView.addObject("showErrorMessage", true);
+        modelAndView.addObject("loginData", new UserLoginDTO());
+        return modelAndView;
     }
 
-    @PostMapping("users/logout")
-    public String logout(){
-        userService.logout();
-        return "redirect:/";
-    }
 
     @GetMapping("users/profile")
-    public ModelAndView profile(){
+    public ModelAndView profile() {
         ModelAndView modelAndView = new ModelAndView("profile");
         modelAndView.addObject("profileData", userService.getProfileData());
         return modelAndView;

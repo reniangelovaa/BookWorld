@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.List;
+
 @Controller
 public class HomeController {
 
@@ -18,18 +20,18 @@ public class HomeController {
 
     @GetMapping("/")
     public String index(Model model) {
-        BookShortInfoDTO randomBook = bookService.getRandomBook();
-        BookShortInfoDTO randomSecondBook = bookService.getRandomBook();
-        BookShortInfoDTO randomThirdBook = bookService.getRandomBook();
-
-        model.addAttribute("book", randomBook);
-        model.addAttribute("secondBook", randomSecondBook);
-        model.addAttribute("thirdBook", randomThirdBook);
+        List<BookShortInfoDTO> uniqueRandomBooks = bookService.getThreeUniqueRandomBooks();
+        model.addAttribute("uniqueBooks", uniqueRandomBooks);
         return "index";
     }
 
     @GetMapping("/about-us")
     public ModelAndView about(){
+        return new ModelAndView("about-us");
+    }
+
+    @GetMapping("/access-denied")
+    public ModelAndView accessDenied() {
         return new ModelAndView("about-us");
     }
 }
