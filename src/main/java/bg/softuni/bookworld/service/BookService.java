@@ -2,7 +2,9 @@ package bg.softuni.bookworld.service;
 
 import bg.softuni.bookworld.data.BookRepository;
 import bg.softuni.bookworld.model.Book;
+import bg.softuni.bookworld.model.Category;
 import bg.softuni.bookworld.model.Picture;
+import bg.softuni.bookworld.service.dto.BookDetailsDTO;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import bg.softuni.bookworld.web.dto.AddBookDTO;
 import jakarta.transaction.Transactional;
@@ -11,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -28,6 +31,7 @@ public class BookService {
                 .map(this::mapToShortInfo)
                 .toList();
     }
+
 
 //    @Transactional
 //    public List<BookShortInfoDTO> getByCategory(String category){
@@ -71,6 +75,23 @@ public class BookService {
         dto.setAuthor(authorName);
 
         return dto;
+    }
+    @Transactional
+    public BookDetailsDTO getBookDetails(Long id){
+        Optional<Book> optionalBook = bookRepository.findById(id);
+        Book book = optionalBook.orElseThrow(() -> new RuntimeException("Book not found"));
+        BookDetailsDTO dto = modelMapper.map(book, BookDetailsDTO.class);
+        Optional<Picture> picture = book.getPictures().stream().findAny();
+        String authorName = book.getAuthor().getFullName();
+        List<String> categories = book.getCategories().stream()
+                .map(category -> category.getName().name())
+                .collect(Collectors.toList());
+        dto.setImageUrl(picture.get().getUrl());
+        dto.setAuthor(authorName);
+        dto.setCategory(categories);
+
+        return dto;
+
     }
 
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head :: head"></head>
+<body>
+<div class="home-container">
+    <div class="book-details-navbar" th:replace="fragments/header :: header"></div>
+    <section class="book-details-content">
+        <div class="book-details">
+            <img th:src="${book.imageUrl}" alt="Book Cover" class="book-details-image">
+            <h2 th:text="${book.name}" class="input-wrapper"></h2>
+            <p th:text="${book.author}" class="input-wrapper"></p>
+            <p class="input-wrapper">
+                <span th:each="category : ${book.category}" th:text="${category}"></span>
+            </p>
+            <p class="input-wrapper" th:text="${book.price}"></p>
+            <p th:text="${book.numberOfPages}" class="input-wrapper"></p>
+            <p th:text="${book.releaseDate}" class="input-wrapper"></p>
+            <p th:text="${book.description}" class="input-wrapper"></p>
+            <div>
+                <a class="button" th:href="@{/}">Add to Cart</a>
+                <a class="button" th:href="@{/shop}">Back</a>
+            </div>
+        </div>
+    </section>
+    <div class="book-details-footer" th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>
