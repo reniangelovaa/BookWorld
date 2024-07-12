@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-
-<head th:replace="fragments/head"></head>
+<head th:replace="fragments/head :: head"></head>
 <body>
-<header th:replace="fragments/header"></header>
+<header th:replace="fragments/header :: header"></header>
 <div class="shopping-cart-container">
     <h1>Your Shopping Cart</h1>
     <div th:if="${cart != null}">
@@ -20,10 +19,10 @@
             </thead>
             <tbody>
             <tr th:each="item : ${cart.cartItems}">
-                <td th:text="${item.book.title}">Book Title</td>
+                <td th:text="${item.book.name}">Book Title</td>
                 <td th:text="${item.quantity}">Quantity</td>
-                <td th:text="${item.book.price}">Price</td>
-                <td th:text="${item.quantity * item.book.price}">Total</td>
+                <td th:text="${#numbers.formatDecimal(item.book.price, 0, 'COMMA', 2, 'POINT')}">Price</td>
+                <td th:text="${#numbers.formatDecimal(item.book.price * item.quantity, 0, 'COMMA', 2, 'POINT')}">Total</td>
                 <td>
                     <form th:action="@{/api/cart/remove/{id}(id=${item.id})}" method="delete">
                         <button type="submit">Remove</button>
@@ -31,7 +30,21 @@
                 </td>
             </tr>
             </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3" style="text-align: right;"><strong>Total:</strong></td>
+                <td>
+                    <strong>
+                        <span th:text="${#numbers.formatDecimal(totalPrice, 0, 'COMMA', 2, 'POINT')}"></span>
+                    </strong>
+                </td>
+                <td></td>
+            </tr>
+            </tfoot>
         </table>
+        <div style="text-align: right; margin-top: 20px;">
+            <a th:href="@{/checkout}" class="button">Finish Order</a>
+        </div>
     </div>
     <div th:if="${cart == null}">
         <p>Your cart is empty.</p>

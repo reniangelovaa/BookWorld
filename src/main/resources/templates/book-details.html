@@ -13,12 +13,16 @@
             <p class="input-wrapper">
                 <span th:each="category : ${book.category}" th:text="${category}"></span>
             </p>
-            <p class="input-wrapper" th:text="${book.price}"></p>
+            <p class="input-wrapper" th:text="${#numbers.formatDecimal(book.price, 0, 'COMMA', 2, 'POINT')}"></p>
             <p th:text="${book.numberOfPages}" class="input-wrapper"></p>
             <p th:text="${book.releaseDate}" class="input-wrapper"></p>
             <p th:text="${book.description}" class="input-wrapper"></p>
             <div>
-                <a class="button" th:href="@{/}">Add to Cart</a>
+                <form th:action="@{/api/cart/add}" method="post">
+                    <input type="hidden" name="bookId" th:value="${book.id}">
+                    <input type="number" name="quantity" value="1" min="1">
+                    <button type="submit" class="button">Add to Cart</button>
+                </form>
                 <a class="button" th:href="@{/shop}">Back</a>
             </div>
         </div>

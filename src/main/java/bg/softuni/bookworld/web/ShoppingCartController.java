@@ -44,7 +44,7 @@ public class ShoppingCartController {
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         Book book = optionalBook.orElseThrow(() -> new RuntimeException("Book not found"));
         shoppingCartService.addBookToCart(book, quantity, user);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "/cart").build();
     }
 
     @DeleteMapping("/remove/{cartItemId}")
