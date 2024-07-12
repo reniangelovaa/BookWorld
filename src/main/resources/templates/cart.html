@@ -22,9 +22,10 @@
                 <td th:text="${item.book.name}">Book Title</td>
                 <td th:text="${item.quantity}">Quantity</td>
                 <td th:text="${#numbers.formatDecimal(item.book.price, 0, 'COMMA', 2, 'POINT')}">Price</td>
-                <td th:text="${#numbers.formatDecimal(item.book.price * item.quantity, 0, 'COMMA', 2, 'POINT')}">Total</td>
+                <td th:text="${#numbers.formatDecimal(item.book.price * item.quantity, 0, 'COMMA', 2, 'POINT')}">Total
+                </td>
                 <td>
-                    <form th:action="@{/api/cart/remove/{id}(id=${item.id})}" method="delete">
+                    <form th:action="@{/api/cart/remove/{id}(id=${item.id})}" method="DELETE">
                         <button type="submit">Remove</button>
                     </form>
                 </td>

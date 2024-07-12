@@ -100,4 +100,12 @@ public class BookService {
 
         return false;
     }
+    @Transactional
+    public List<BookShortInfoDTO> getBooksByCategory(Category category) {
+        return bookRepository.findAllByCategory(category)
+                .stream()
+                .map(this::mapToShortInfo)
+                .toList();
+    }
 }
+

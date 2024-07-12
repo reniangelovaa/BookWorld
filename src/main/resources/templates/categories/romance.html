@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments/head"></head>
+<body>
+<div class="home-container">
+    <div class="home-navbar" th:replace="fragments/header"></div>
+    <section class="collection">
+        <div class="item card" th:each="singleBook : ${books}">
+
+            <img th:src="${singleBook.imageUrl}" alt="Book Cover" class="blog-post-card-image">
+            <h2 th:text="${singleBook.name}"></h2>
+            <p th:text="${singleBook.author}"></p>
+            <p class="price" th:text="${#numbers.formatDecimal(singleBook.price, 0, 'COMMA', 2, 'POINT')}"></p>
+            <p><a th:href="@{'/book/' + ${singleBook.id}}">Learn more</a></p>
+
+        </div>
+    </section>
+    <div class="home-footer" th:replace="fragments/footer"></div>
+</div>
+</body>
+</html>

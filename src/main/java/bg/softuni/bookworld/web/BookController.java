@@ -2,8 +2,10 @@ package bg.softuni.bookworld.web;
 
 import bg.softuni.bookworld.data.BookRepository;
 import bg.softuni.bookworld.model.Book;
+import bg.softuni.bookworld.model.Category;
 import bg.softuni.bookworld.model.enums.CategoryType;
 import bg.softuni.bookworld.service.BookService;
+import bg.softuni.bookworld.service.CategoryService;
 import bg.softuni.bookworld.service.dto.BookDetailsDTO;
 import bg.softuni.bookworld.web.dto.AddBookDTO;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
@@ -27,6 +29,7 @@ public class BookController {
 
     private final BookService bookService;
     private final BookRepository bookRepository;
+    private final CategoryService categoryService;
 
 
     @GetMapping("/shop")
@@ -35,12 +38,6 @@ public class BookController {
         model.addAttribute("allBooks", books);
         return "shop";
     }
-
-//    @GetMapping("/shop/fantasy")
-//    public String fantasy(Model model){
-//        List<BookShortInfoDTO> books = bookService.getByCategory("FANTASY");
-//        return "fantasy";
-//    }
 
     @GetMapping("/add-book")
     public ModelAndView addBook(){
@@ -73,6 +70,15 @@ public class BookController {
         return modelAndView;
     }
 
+    @GetMapping("/shop/category/{categoryId}")
+    public String getBooksByCategory(@PathVariable Long categoryId, Model model) {
+        Category category = categoryService.findById(categoryId);
+        List<BookShortInfoDTO> books = bookService.getBooksByCategory(category);
 
+        model.addAttribute("books", books);
+        model.addAttribute("category", category);
+
+        return "categories/" + category.getName().toString().toLowerCase();
+    }
 
 }
