@@ -14,6 +14,7 @@ public class AddBookDTO {
     private String author;
     private String description;
     private Double price;
+    private int copies;
     private Integer numberOfPages;
     private LocalDate releaseDate;
     private String imageUrl;

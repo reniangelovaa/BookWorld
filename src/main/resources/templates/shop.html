@@ -12,7 +12,7 @@
             <h2 th:text="${singleBook.name}"></h2>
             <p th:text="${singleBook.author}"></p>
             <p class="price" th:text="${singleBook.price}"></p>
-            <p><a href="/">Learn more</a></p>
+            <p><a th:href="@{'/book/' + ${singleBook.id}}">Learn more</a></p>
 
         </div>
     </section>  
