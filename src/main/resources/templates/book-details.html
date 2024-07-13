@@ -18,6 +18,7 @@
             <p th:text="${book.releaseDate}" class="input-wrapper"></p>
             <p th:text="${book.description}" class="input-wrapper"></p>
             <div>
+                <div>Quantity</div>
                 <form th:action="@{/api/cart/add}" method="post">
                     <input type="hidden" name="bookId" th:value="${book.id}">
                     <input type="number" name="quantity" value="1" min="1">

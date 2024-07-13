@@ -1,17 +1,22 @@
 package bg.softuni.bookworld.web;
 
 import bg.softuni.bookworld.data.BookRepository;
+import bg.softuni.bookworld.data.CartItemRepository;
 import bg.softuni.bookworld.data.UserRepository;
 import bg.softuni.bookworld.model.Book;
 import bg.softuni.bookworld.model.ShoppingCart;
 import bg.softuni.bookworld.model.User;
 import bg.softuni.bookworld.service.BookService;
+import bg.softuni.bookworld.service.CartItemService;
 import bg.softuni.bookworld.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.Optional;
@@ -28,6 +33,9 @@ public class ShoppingCartController {
     private UserRepository userRepository;
     @Autowired
     private BookRepository bookRepository;
+
+    @Autowired
+    private CartItemService cartItemService;
 
     @GetMapping
     public ResponseEntity<ShoppingCart> showCart(Principal principal) {
@@ -48,10 +56,11 @@ public class ShoppingCartController {
     }
 
     @DeleteMapping("/remove/{cartItemId}")
-    public ResponseEntity<Void> removeFromCart(@PathVariable Long cartItemId) {
-        shoppingCartService.removeBookFromCart(cartItemId);
-            return ResponseEntity.noContent().build();
+    public ModelAndView removeFromCart(@PathVariable Long cartItemId) {
+        cartItemService.removeBookFromCart(cartItemId);
+        return new ModelAndView(new RedirectView("/cart", true));
     }
+
 
 }
 
