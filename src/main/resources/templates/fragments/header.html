@@ -1,3 +1,4 @@
+
 <div th:fragment="header" class="home-navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <header data-role="Header" class="home-header max-width-container">
         <div class="home-navbar1">
@@ -20,6 +21,11 @@
                         </form>
                     </th:block>
                 </div>
+            </div>
+            <div class="home-right">
+                <a th:href="@{/cart}">
+                    <img src="/images/shopping-cart.png" alt="Shopping Cart" class="shopping-cart-icon">
+                </a>
             </div>
         </div>
     </header>

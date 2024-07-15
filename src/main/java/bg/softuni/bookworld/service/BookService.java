@@ -9,6 +9,7 @@ import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import bg.softuni.bookworld.web.dto.AddBookDTO;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.ObjectNotFoundException;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -73,7 +74,7 @@ public class BookService {
     @Transactional
     public BookDetailsDTO getBookDetails(Long id){
         Optional<Book> optionalBook = bookRepository.findById(id);
-        Book book = optionalBook.orElseThrow(() -> new RuntimeException("Book not found"));
+        Book book = optionalBook.orElseThrow(() -> new RuntimeException());
         BookDetailsDTO dto = modelMapper.map(book, BookDetailsDTO.class);
         Optional<Picture> picture = book.getPictures().stream().findAny();
         String authorName = book.getAuthor().getFullName();

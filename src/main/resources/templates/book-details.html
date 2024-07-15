@@ -8,23 +8,23 @@
     <section class="book-details-content">
         <div class="book-details">
             <img th:src="${book.imageUrl}" alt="Book Cover" class="book-details-image">
-            <h2 th:text="${book.name}" class="input-wrapper"></h2>
-            <p th:text="${book.author}" class="input-wrapper"></p>
-            <p class="input-wrapper">
+            <h2 th:text="${book.name}" class="book-title"></h2>
+            <p th:text="${book.author}" class="book-author"></p>
+            <p class="book-category">
                 <span th:each="category : ${book.category}" th:text="${category}"></span>
             </p>
-            <p class="input-wrapper" th:text="${#numbers.formatDecimal(book.price, 0, 'COMMA', 2, 'POINT')}"></p>
-            <p th:text="${book.numberOfPages}" class="input-wrapper"></p>
-            <p th:text="${book.releaseDate}" class="input-wrapper"></p>
-            <p th:text="${book.description}" class="input-wrapper"></p>
-            <div>
+            <p class="book-price-label">Price: <span class="book-price" th:text="${#numbers.formatDecimal(book.price, 0, 'COMMA', 2, 'POINT')}"></span></p>
+            <p class="book-pages-label">Pages: <span class="book-pages" th:text="${book.numberOfPages}"></span></p>
+            <p class="book-release-date-label">Release Date: <span class="book-release-date" th:text="${book.releaseDate}"></span></p>
+            <p th:text="${book.description}" class="book-description"></p>
+            <div class="book-actions">
                 <div>Quantity</div>
-                <form th:action="@{/api/cart/add}" method="post">
+                <form th:action="@{/api/cart/add}" method="post" class="add-to-cart-form">
                     <input type="hidden" name="bookId" th:value="${book.id}">
-                    <input type="number" name="quantity" value="1" min="1">
-                    <button type="submit" class="button">Add to Cart</button>
+                    <input type="number" name="quantity" value="1" min="1" class="quantity-input">
+                    <button type="submit" class="add-to-cart-button">Add to Cart</button>
                 </form>
-                <a class="button" th:href="@{/shop}">Back</a>
+                <a class="button back-button" th:href="@{/shop}">Back</a>
             </div>
         </div>
     </section>
