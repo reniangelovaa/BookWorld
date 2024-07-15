@@ -23,29 +23,27 @@
                     <div class="home-cards-container">
                         <div class="category-card-category-card">
                             <img alt="image" src="/images/fantasy-book.jpg" class="category-card-image"/>
-                            <span class="category-card-text"><span>Fantasy</span></span>
+                            <a th:href="@{/shop/category/1}" class="home-text31">Fantasy</a>
                         </div>
                         <div class="category-card-category-card">
                             <img alt="image" src="/images/thriller-book.jpg" class="category-card-image"/>
-                            <span class="category-card-text"><span>Thriller</span></span>
+                            <a th:href="@{/shop/category/2}" class="home-text31">Thriller</a>
                         </div>
                         <div class="category-card-category-card">
                             <img alt="image" src="/images/romance-book.jpg" class="category-card-image"/>
-                            <span class="category-card-text"><span>Romance</span></span>
+                            <a th:href="@{/shop/category/3}" class="home-text31">Romance</a>
                         </div>
                         <div class="category-card-category-card">
                             <img alt="image" src="/images/horror-book.jpg" class="category-card-image"/>
-                            <span class="category-card-text"><span>Horror</span></span>
+                            <a th:href="@{/shop/category/4}" class="home-text31">Horror</a>
                         </div>
                         <div class="category-card-category-card">
                             <img alt="image" src="/images/historic-book.jpg" class="category-card-image"/>
-                            <span class="category-card-text"><span>History</span></span>
+                            <a th:href="@{/shop/category/6}" class="home-text31">History</a>
                         </div>
                         <div class="category-card-category-card">
                             <img alt="image" src="/images/children-book.jpg" class="category-card-image"/>
-                            <span class="category-card-text">
-                  <span>Children</span>
-                </span>
+                            <a th:href="@{/shop/category/5}" class="home-text31">Children</a>
                         </div>
                     </div>
                 </div>
@@ -88,7 +86,7 @@
                                     <span class="blog-post-card-text1">
                                         <span th:text="${singleBook.author}"></span>
                                     </span>
-                                    <a href="#" class="button">Read more</a>
+                                    <a th:href="@{'/book/' + ${singleBook.id}}" class="button">Read more</a>
                                 </div>
                             </div>
 

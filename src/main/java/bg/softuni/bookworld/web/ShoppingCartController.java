@@ -51,6 +51,7 @@ public class ShoppingCartController {
         User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found"));
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         Book book = optionalBook.orElseThrow(() -> new RuntimeException("Book not found"));
+
         shoppingCartService.addBookToCart(book, quantity, user);
         return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "/cart").build();
     }

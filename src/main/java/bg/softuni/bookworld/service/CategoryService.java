@@ -1,10 +1,13 @@
 package bg.softuni.bookworld.service;
 
+import bg.softuni.bookworld.data.BookRepository;
 import bg.softuni.bookworld.data.CategoryRepository;
+import bg.softuni.bookworld.model.Book;
 import bg.softuni.bookworld.model.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -12,6 +15,7 @@ import java.util.Optional;
 public class CategoryService {
 
     private final CategoryRepository categoryRepository;
+    private final BookRepository bookRepository;
 
     public Category findById(Long id){
         Optional<Category> optionalCategory = categoryRepository.findById(id);
@@ -21,4 +25,6 @@ public class CategoryService {
             throw new IllegalArgumentException("Category not found");
         }
     }
+
+
 }
