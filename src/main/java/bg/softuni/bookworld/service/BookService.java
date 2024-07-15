@@ -1,9 +1,9 @@
 package bg.softuni.bookworld.service;
 
+import bg.softuni.bookworld.data.AuthorRepository;
 import bg.softuni.bookworld.data.BookRepository;
-import bg.softuni.bookworld.model.Book;
-import bg.softuni.bookworld.model.Category;
-import bg.softuni.bookworld.model.Picture;
+import bg.softuni.bookworld.data.PictureRepository;
+import bg.softuni.bookworld.model.*;
 import bg.softuni.bookworld.service.dto.BookDetailsDTO;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import bg.softuni.bookworld.web.dto.AddBookDTO;
@@ -22,6 +22,8 @@ public class BookService {
     private final BookRepository bookRepository;
     private final Random random = new Random();
     private final ModelMapper modelMapper;
+    private final AuthorRepository authorRepository;
+    private final PictureRepository pictureRepository;
 
 
     @Transactional
@@ -32,14 +34,6 @@ public class BookService {
                 .toList();
     }
 
-
-//    @Transactional
-//    public List<BookShortInfoDTO> getByCategory(String category){
-//        return bookRepository.findAllByCategory(category)
-//                .stream()
-//                .map(this::mapToShortInfo)
-//                .toList();
-//    }
 
     @Transactional
     public BookShortInfoDTO getRandomBook() {
@@ -95,11 +89,25 @@ public class BookService {
     }
 
 
-    public boolean add(AddBookDTO data) {
-        Book toInsert = modelMapper.map(data, Book.class);
+    public void addBook(AddBookDTO data) {
+        Book book = modelMapper.map(data, Book.class);
+        Author author = authorRepository.findByFullName(data.getAuthor());
+        if (author == null) {
+            author = new Author();
+            author.setFullName(data.getAuthor());
+            authorRepository.save(author);
+        }
+        book.setAuthor(author);
+        Picture picture = new Picture();
+        picture.setUrl(data.getImageUrl());
+        picture.setBook(book);
+        book.getPictures().add(picture);
+        pictureRepository.save(picture);
+    // todo picture saving error
 
-        return false;
+        bookRepository.save(book);
     }
+
     @Transactional
     public List<BookShortInfoDTO> getBooksByCategory(Category category) {
         return bookRepository.findAllByCategory(category)

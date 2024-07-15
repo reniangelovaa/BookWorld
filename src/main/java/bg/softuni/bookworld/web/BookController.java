@@ -53,11 +53,9 @@ public class BookController {
     }
 
     @PostMapping("/add-book")
-    public String doAddBook(@Valid AddBookDTO data,
-                             BindingResult bindingResult,
-                             RedirectAttributes redirectAttributes){
+    public String doAddBook(@Valid AddBookDTO data){
 
-        bookService.add(data);
+        bookService.addBook(data);
         return "redirect:/add-book";
     }
 
