@@ -1,4 +1,12 @@
 spring:
+  spring:
+  mail:
+    host: localhost
+    port: 25
+    properties:
+      mail:
+        transport:
+          protocol: smtp
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/bookworld?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC"
@@ -29,6 +37,7 @@ spring:
         show_sql: true
         format_sql: true
     defer-datasource-initialization: true
+
 #Cloudinary Properties
 #cloudinary:
   #api-key: 
@@ -41,6 +50,7 @@ spring:
   resources:
     static-locations: file:./src/main/resources/static/
     cache-period: 0
+
 
 
 
