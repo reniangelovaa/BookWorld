@@ -13,10 +13,10 @@
                 th:method="POST"
                 th:object="${bookData}">
 
-            <h3>Add new book</h3>
+            <h3 th:text="#{label_book_add_new}">Add new book</h3>
             <div>
                 <div>
-                    <label for="inputName">Name</label>
+                    <label for="inputName" th:text="#{label_book_name}">Name</label>
                 </div>
                 <div class="input-wrapper">
                     <input name="name"
@@ -25,12 +25,12 @@
                            type="text"
                            id="inputName"
                            th:field="*{name}">
-                    <small class="input-error" id="inputNameError">Name length must be more than 2 characters</small>
+                    <small class="input-error" id="inputNameError" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></small>
                 </div>
             </div>
             <div>
                 <div>
-                    <label for="inputAuthor">Author</label>
+                    <label for="inputAuthor" th:text="#{label_book_author}">Author</label>
                 </div>
                 <div class="input-wrapper">
                     <input name="authorName"
@@ -38,27 +38,29 @@
                            required minlength="2" maxlength="50"
                            type="text"
                            id="inputAuthor"
-                           th:field="*{author}">
-                    <small class="input-error" id="inputAuthorNameError">Author name length must be more than 2 characters</small>
+                           th:field="*{author}"
+                           >
+                    <small class="input-error" id="inputAuthorNameError" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></small>
                 </div>
             </div>
 
             <div>
                 <div>
-                    <label for="inputDescription">Description</label>
+                    <label for="inputDescription" th:text="#{label_book_description}">Description</label>
                 </div>
                 <div class="input-wrapper">
                     <textarea name="description"
                               class="input"
                               required minlength="5"
                               id="inputDescription"
-                              th:field="*{description}"></textarea>
-                    <small class="input-error" id="inputDescriptionError">Description length must be more than 5 characters</small>
+                              th:field="*{description}"
+                              ></textarea>
+                    <small class="input-error" id="inputDescriptionError" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></small>
                 </div>
             </div>
             <div>
                 <div>
-                    <label for="inputPrice">Price</label>
+                    <label for="inputPrice" th:text="#{label_book_price}">Price</label>
                 </div>
                 <div class="input-wrapper">
                     <input name="price"
@@ -71,7 +73,7 @@
             </div>
             <div>
                 <div>
-                    <label for="inputCopies">Copies</label>
+                    <label for="inputCopies" th:text="#{label_book_copies}">Copies</label>
                 </div>
                 <div class="input-wrapper">
                     <input name="copies"
@@ -84,7 +86,7 @@
             </div>
             <div>
                 <div>
-                    <label for="inputNumberOfPages">Number of pages</label>
+                    <label for="inputNumberOfPages" th:text="#{label_book_numberOfPages}">Number of pages</label>
                 </div>
                 <div class="input-wrapper">
                     <input name="numberOfPages"
@@ -97,7 +99,7 @@
             </div>
             <div>
                 <div>
-                    <label for="inputReleaseDate">Release date</label>
+                    <label for="inputReleaseDate" th:text="#{label_book_releaseDate}">Release date</label>
                 </div>
                 <div class="input-wrapper">
                     <input name="releaseDate"
@@ -111,7 +113,7 @@
 
             <div>
                 <div class="input-wrapper">
-                    <label for="imageUrl">Image URL</label>
+                    <label for="imageUrl" th:text="#{label_book_imageUrl}">Image URL</label>
                     <input id="imageUrl" class="input" type="text"
                            th:field="*{imageUrl}">
                 </div>
@@ -119,7 +121,7 @@
 
             <div>
                 <div class="input-wrapper">
-                    <label for="categories">Categories:</label>
+                    <label for="categories" th:text="#{label_book_categories}">Categories:</label>
 
                     <div class="categories-wrapper">
                     <input th:each="category: ${categoryTypes}"

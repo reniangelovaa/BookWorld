@@ -1,25 +1,37 @@
-
 <div th:fragment="header" class="home-navbar" xmlns:sec="http://www.w3.org/1999/xhtml">
     <header data-role="Header" class="home-header max-width-container">
         <div class="home-navbar1">
             <div class="home-middle">
                 <div class="home-left">
                     <th:block sec:authorize="!isAuthenticated()">
-                        <a th:href="@{/}" class="navbar-link">HOME</a>
-                        <a th:href="@{/about-us}" class="navbar-link">ABOUT US</a>
-                        <a th:href="@{/users/register}" class="navbar-link">REGISTER</a>
-                        <a th:href="@{/users/login}" class="navbar-link">LOGIN</a>
+                        <a th:href="@{/}" class="navbar-link" th:text="#{navbar_home}">HOME</a>
+                        <a th:href="@{/about-us}" class="navbar-link" th:text="#{navbar_about}">ABOUT US</a>
+                        <a th:href="@{/users/register}" class="navbar-link" th:text="#{navbar_register}">REGISTER</a>
+                        <a th:href="@{/users/login}" class="navbar-link" th:text="#{navbar_login}">LOGIN</a>
                     </th:block>
                     <th:block sec:authorize="isAuthenticated()">
-                        <a th:href="@{/shop}" class="navbar-link">SHOP</a>
-                        <a th:href="@{/add-book}" sec:authorize="hasRole('ADMINISTRATOR')" class="navbar-link">ADD BOOK</a>
-                        <a th:href="@{/users/profile}" class="navbar-link">PROFILE</a>
+                        <a th:href="@{/shop}" class="navbar-link" th:text="#{navbar_shop}">SHOP</a>
+                        <a th:href="@{/add-book}" sec:authorize="hasRole('ADMINISTRATOR')" class="navbar-link" th:text="#{navbar_add_book}">ADD
+                            BOOK</a>
+                        <a th:href="@{/users/profile}" class="navbar-link" th:text="#{navbar_profile}">PROFILE</a>
                         <form class="navbar-link"
                               th:method="POST"
                               th:action="@{/users/logout}">
-                            <button type="submit" class="navbar-button">LOGOUT</button>
+                            <button type="submit" class="navbar-button" th:text="#{navbar_logout}">LOGOUT</button>
                         </form>
                     </th:block>
+                    <div>
+                        <form th:method="get">
+                            <label class="home-text31" for="lang" th:text="#{navbar_language}">Language</label>
+                            <select
+                                    id="lang"
+                                    name="lang"
+                                    onchange="this.form.submit()">
+                                <option value="en_US" th:selected="${#locale.toString()} == 'en_US'">English</option>
+                                <option value="bg_BG" th:selected="${#locale.toString()} == 'bg_BG'">Български</option>
+                            </select>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="home-right">

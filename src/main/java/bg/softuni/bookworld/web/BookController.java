@@ -53,11 +53,16 @@ public class BookController {
     }
 
     @PostMapping("/add-book")
-    public String doAddBook(@Valid AddBookDTO data){
+    public String doAddBook(@Valid AddBookDTO data, BindingResult bindingResult, Model model){
+
+        if (bindingResult.hasErrors()) {
+            return "add-book";
+        }
 
         bookService.addBook(data);
         return "redirect:/add-book";
     }
+
 
     @GetMapping("/book/{id}")
     public ModelAndView showBookDetails(@PathVariable("id") long id){

@@ -26,12 +26,8 @@ public class HomeController {
     }
 
     @GetMapping("/about-us")
-    public ModelAndView about(){
+    public ModelAndView about() {
         return new ModelAndView("about-us");
     }
 
-    @GetMapping("/access-denied")
-    public ModelAndView accessDenied() {
-        return new ModelAndView("about-us");
-    }
 }

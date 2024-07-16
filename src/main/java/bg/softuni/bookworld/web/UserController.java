@@ -33,15 +33,15 @@ public class UserController {
                              RedirectAttributes redirectAttributes,
                              Model model) {
         if (userService.isUsernameTaken(data.getUsername())) {
-            bindingResult.rejectValue("username", "error.username", "Username is already taken.");
+            bindingResult.rejectValue("username", "error_username_taken");
         }
 
         if (userService.isEmailTaken(data.getEmail())) {
-            bindingResult.rejectValue("email", "error.email", "Email is already taken.");
+            bindingResult.rejectValue("email", "error_email_taken");
         }
 
         if (!userService.doPasswordsMatch(data.getPassword(), data.getConfirmPassword())) {
-            bindingResult.rejectValue("confirmPassword", "error.confirmPassword", "Passwords do not match.");
+            bindingResult.rejectValue("confirmPassword", "error_password_mismatch");
         }
 
         if (bindingResult.hasErrors()){
