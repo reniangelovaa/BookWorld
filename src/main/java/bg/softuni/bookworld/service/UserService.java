@@ -31,4 +31,17 @@ public class UserService {
         return modelMapper.map(userHelperService.getUser(), UserProfileDTO.class);
     }
 
+    public boolean isUsernameTaken(String username) {
+        return userRepository.existsByUsername(username);
+    }
+
+    public boolean isEmailTaken(String email) {
+        return userRepository.existsByEmail(email);
+    }
+
+    public boolean doPasswordsMatch(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
+    }
 }
+
+

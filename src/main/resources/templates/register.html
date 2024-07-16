@@ -27,9 +27,7 @@
                                 required minlength="5" maxlength="20"
                                 type="text"
                                 id="inputUsername">
-                            <small class="input-error" id="usernameError">Username length must be more than 5 characters.</small>
-                        <small class="input-error"  th:if="${#fields.hasErrors('username')}" id="usernameUniqueError">Username is already
-                            occupied.</small>
+                        <small class="input-error" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>
                     </div>
                 </div>
                 <div>
@@ -44,7 +42,7 @@
                                 required minlength="5" maxlength="50"
                                 type="text"
                                 id="inputFullName">
-                        <small class="input-error"  id="fullNameError">Full Name must be more than 5 characters.</small>
+                        <small class="input-error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></small>
                     </div>
                 </div>
                 <div>
@@ -58,7 +56,7 @@
                                 name="email"
                                 type="email"
                                 id="inputEmail">
-                        <small class="input-error"  id="emailError">Must be a valid email!</small>
+                        <small class="input-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
                     </div>
                 </div>
                 <div>
@@ -73,7 +71,7 @@
                                 required minlength="5" maxlength="20"
                                 type="password"
                                 id="inputPassword">
-                        <small class="input-error"  id="passwordError">Password must be between 5 and 20 characters.</small>
+                        <small class="input-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></small>
                     </div>
                 </div>
                 <div>
@@ -88,7 +86,7 @@
                                 required minlength="5" maxlength="20"
                                 type="password"
                                 id="inputConfirmPassword">
-                        <small class="input-error"  id="confirmPasswordError">Passwords should match!</small>
+                        <small class="input-error" th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></small>
                     </div>
                 </div>
                 <div>
