@@ -34,7 +34,7 @@ public class Book {
     private Set<Category> categories;
     @OneToMany(targetEntity = Comment.class, mappedBy = "book")
     private Set<Comment> comments;
-    @OneToMany(targetEntity = Picture.class, mappedBy = "book")
+    @OneToMany(targetEntity = Picture.class, mappedBy = "book", cascade = CascadeType.ALL)
     private Set<Picture> pictures;
 
     public Book() {

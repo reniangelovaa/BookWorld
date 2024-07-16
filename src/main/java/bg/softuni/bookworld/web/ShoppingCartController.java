@@ -43,6 +43,7 @@ public class ShoppingCartController {
         Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
         User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("User", principal.getName()));
         ShoppingCart cart = shoppingCartService.getShoppingCart(user);
+        shoppingCartService.deleteEmptyShoppingCart(cart);
         return ResponseEntity.ok(cart);
     }
 

@@ -30,10 +30,15 @@ public class ShoppingCartViewController {
         String username = principal.getName();
         Optional<User> optionalUser = userRepository.findByUsername(username);
         User user = optionalUser.orElseThrow(()-> new ObjectNotFoundException("User", principal.getName()));
+
         ShoppingCart cart = shoppingCartService.getShoppingCart(user);
-        double totalPrice = calculateTotalPrice(cart);
-        model.addAttribute("cart", cart);
-        model.addAttribute("totalPrice", totalPrice);
+        if (cart != null){
+            shoppingCartService.deleteEmptyShoppingCart(cart);
+            double totalPrice = calculateTotalPrice(cart);
+            model.addAttribute("cart", cart);
+            model.addAttribute("totalPrice", totalPrice);
+        }
+
         return "cart";
     }
 

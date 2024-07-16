@@ -89,7 +89,7 @@ public class BookService {
 
     }
 
-
+    @Transactional
     public void addBook(AddBookDTO data) {
         Book book = modelMapper.map(data, Book.class);
         Author author = authorRepository.findByFullName(data.getAuthor());
@@ -99,6 +99,8 @@ public class BookService {
             authorRepository.save(author);
         }
         book.setAuthor(author);
+        bookRepository.save(book);
+
         Picture picture = new Picture();
         picture.setUrl(data.getImageUrl());
         picture.setBook(book);
@@ -106,7 +108,6 @@ public class BookService {
         pictureRepository.save(picture);
     // todo picture saving error
 
-        bookRepository.save(book);
     }
 
     @Transactional

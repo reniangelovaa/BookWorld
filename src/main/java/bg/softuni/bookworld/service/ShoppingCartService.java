@@ -44,4 +44,11 @@ public class ShoppingCartService {
         cartItemRepository.save(cartItem);
     }
 
+    public void deleteEmptyShoppingCart(ShoppingCart shoppingCart){
+        if (shoppingCart.getCartItems().isEmpty()){
+            shoppingCart.setUser(null);
+            shoppingCartRepository.delete(shoppingCart);
+        }
+    }
+
 }
