@@ -4,7 +4,7 @@
 <head th:replace="fragments/head :: head"></head>
 <body>
 <div class="home-container">
-    <div class="book-details-navbar" th:replace="fragments/header :: header"></div>
+    <div class="home-navbar" th:replace="fragments/header :: header"></div>
     <section class="book-details-content">
         <div class="book-details">
             <img th:src="${book.imageUrl}" alt="Book Cover" class="book-details-image">
@@ -28,7 +28,7 @@
             </div>
         </div>
     </section>
-    <div class="book-details-footer" th:replace="fragments/footer :: footer"></div>
+    <div class="home-footer" th:replace="fragments/footer :: footer"></div>
 </div>
 </body>
 </html>

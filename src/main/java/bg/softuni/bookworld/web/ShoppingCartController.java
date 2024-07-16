@@ -9,6 +9,7 @@ import bg.softuni.bookworld.model.User;
 import bg.softuni.bookworld.service.BookService;
 import bg.softuni.bookworld.service.CartItemService;
 import bg.softuni.bookworld.service.ShoppingCartService;
+import bg.softuni.bookworld.service.exeption.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -40,7 +41,7 @@ public class ShoppingCartController {
     @GetMapping
     public ResponseEntity<ShoppingCart> showCart(Principal principal) {
         Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-        User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("User", principal.getName()));
         ShoppingCart cart = shoppingCartService.getShoppingCart(user);
         return ResponseEntity.ok(cart);
     }
@@ -48,9 +49,9 @@ public class ShoppingCartController {
     @PostMapping("/add")
     public ResponseEntity<Void> addToCart(@RequestParam Long bookId, @RequestParam int quantity, Principal principal) {
         Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
-        User user = optionalUser.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("User", principal.getName()));
         Optional<Book> optionalBook = bookRepository.findById(bookId);
-        Book book = optionalBook.orElseThrow(() -> new RuntimeException("Book not found"));
+        Book book = optionalBook.orElseThrow(() -> new ObjectNotFoundException("Book", bookId.toString()));
 
         shoppingCartService.addBookToCart(book, quantity, user);
         return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "/cart").build();

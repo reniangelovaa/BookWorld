@@ -5,6 +5,7 @@ import bg.softuni.bookworld.model.CartItem;
 import bg.softuni.bookworld.model.ShoppingCart;
 import bg.softuni.bookworld.model.User;
 import bg.softuni.bookworld.service.ShoppingCartService;
+import bg.softuni.bookworld.service.exeption.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -28,7 +29,7 @@ public class ShoppingCartViewController {
     public String showCart(Model model, Principal principal) {
         String username = principal.getName();
         Optional<User> optionalUser = userRepository.findByUsername(username);
-        User user = optionalUser.orElseThrow(()-> new UsernameNotFoundException("User not found"));
+        User user = optionalUser.orElseThrow(()-> new ObjectNotFoundException("User", principal.getName()));
         ShoppingCart cart = shoppingCartService.getShoppingCart(user);
         double totalPrice = calculateTotalPrice(cart);
         model.addAttribute("cart", cart);

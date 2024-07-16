@@ -4,6 +4,7 @@ import bg.softuni.bookworld.data.BookRepository;
 import bg.softuni.bookworld.data.CategoryRepository;
 import bg.softuni.bookworld.model.Book;
 import bg.softuni.bookworld.model.Category;
+import bg.softuni.bookworld.service.exeption.ObjectNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class CategoryService {
         if (optionalCategory.isPresent()) {
             return optionalCategory.get();
         } else {
-            throw new IllegalArgumentException("Category not found");
+            throw new ObjectNotFoundException("Category", id.toString());
         }
     }
 
