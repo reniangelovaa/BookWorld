@@ -1,5 +1,7 @@
 package bg.softuni.bookworld.config;
 
+import bg.softuni.bookworld.data.UserRepository;
+import bg.softuni.bookworld.service.session.AppUserDetailsService;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,5 +45,10 @@ public class SecurityConfig {
                         }
                 )
                 .build();
+    }
+
+    @Bean
+    public AppUserDetailsService userDetailsService(UserRepository userRepository) {
+        return new AppUserDetailsService(userRepository);
     }
 }
