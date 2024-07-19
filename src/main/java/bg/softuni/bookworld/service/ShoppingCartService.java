@@ -44,11 +44,24 @@ public class ShoppingCartService {
         cartItemRepository.save(cartItem);
     }
 
-    public void deleteEmptyShoppingCart(ShoppingCart shoppingCart){
-        if (shoppingCart.getCartItems().isEmpty()){
+    public void deleteEmptyShoppingCart(ShoppingCart shoppingCart) {
+        if (shoppingCart.getCartItems().isEmpty()) {
             shoppingCart.setUser(null);
             shoppingCartRepository.delete(shoppingCart);
         }
     }
 
+    public double calculateTotalPrice(ShoppingCart cart) {
+        if (cart == null) {
+            return 0.0;
+        }
+
+        double total = 0.0;
+        for (CartItem item : cart.getCartItems()) {
+            total += item.getBook().getPrice() * item.getQuantity();
+        }
+        return total;
+    }
 }
+
+

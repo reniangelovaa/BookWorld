@@ -1,5 +1,7 @@
 package bg.softuni.bookworld.service;
 
+import bg.softuni.bookworld.client.CommentsClient;
+import bg.softuni.bookworld.client.dto.CommentDTO;
 import bg.softuni.bookworld.data.AuthorRepository;
 import bg.softuni.bookworld.data.BookRepository;
 import bg.softuni.bookworld.data.PictureRepository;
@@ -25,6 +27,7 @@ public class BookService {
     private final ModelMapper modelMapper;
     private final AuthorRepository authorRepository;
     private final PictureRepository pictureRepository;
+    private final CommentsClient commentsClient;
 
 
     @Transactional
@@ -116,6 +119,18 @@ public class BookService {
                 .stream()
                 .map(this::mapToShortInfo)
                 .toList();
+    }
+
+    public CommentDTO addComment(CommentDTO comment) {
+        return commentsClient.addComment(comment);
+    }
+
+    public void deleteComment(Long id) {
+        commentsClient.deleteComment(id);
+    }
+
+    public List<CommentDTO> getCommentsByBookId(Long bookId) {
+        return commentsClient.getCommentsByBookId(bookId);
     }
 }
 

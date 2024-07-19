@@ -10,10 +10,15 @@ import bg.softuni.bookworld.service.BookService;
 import bg.softuni.bookworld.service.CartItemService;
 import bg.softuni.bookworld.service.ShoppingCartService;
 import bg.softuni.bookworld.service.exeption.ObjectNotFoundException;
+import jakarta.servlet.http.HttpServletRequest;
+import org.bouncycastle.math.raw.Mod;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -21,15 +26,15 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.Optional;
+import java.util.logging.Logger;
 
-@RestController
-@RequestMapping("/api/cart")
+@Controller
+@RequestMapping("/cart")
 public class ShoppingCartController {
 
     @Autowired
     private ShoppingCartService shoppingCartService;
-    @Autowired
-    private BookService bookService;
+
     @Autowired
     private UserRepository userRepository;
     @Autowired
@@ -39,28 +44,46 @@ public class ShoppingCartController {
     private CartItemService cartItemService;
 
     @GetMapping
-    public ResponseEntity<ShoppingCart> showCart(Principal principal) {
+    public String showCart(Model model, Principal principal) {
         Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
         User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("User", principal.getName()));
         ShoppingCart cart = shoppingCartService.getShoppingCart(user);
-        shoppingCartService.deleteEmptyShoppingCart(cart);
-        return ResponseEntity.ok(cart);
+
+        if (cart != null) {
+            shoppingCartService.deleteEmptyShoppingCart(cart);
+            double totalPrice = shoppingCartService.calculateTotalPrice(cart);
+            model.addAttribute("cart", cart);
+            model.addAttribute("totalPrice", totalPrice);
+        }
+
+        return "cart";
     }
 
     @PostMapping("/add")
-    public ResponseEntity<Void> addToCart(@RequestParam Long bookId, @RequestParam int quantity, Principal principal) {
+    public String addToCart(@RequestParam Long bookId, @RequestParam int quantity, Principal principal, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        ModelAndView modelAndView = new ModelAndView("book-details");
         Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
         User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("User", principal.getName()));
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         Book book = optionalBook.orElseThrow(() -> new ObjectNotFoundException("Book", bookId.toString()));
 
         shoppingCartService.addBookToCart(book, quantity, user);
-        return ResponseEntity.status(HttpStatus.SEE_OTHER).header("Location", "/cart").build();
+        modelAndView.addObject("message", "Book added to cart succesfully!");
+
+        redirectAttributes.addFlashAttribute("message", "Book added to cart successfully!");
+
+
+        String referer = request.getHeader("Referer");
+
+            return "redirect:" + referer;
+
     }
 
-    @DeleteMapping("/remove/{cartItemId}")
-    public ModelAndView removeFromCart(@PathVariable Long cartItemId) {
+
+    @PostMapping("/remove/{cartItemId}")
+    public ModelAndView removeFromCart(@PathVariable Long cartItemId, RedirectAttributes redirectAttributes) {
         cartItemService.removeBookFromCart(cartItemId);
+        redirectAttributes.addFlashAttribute("message", "Item removed from cart!");
         return new ModelAndView(new RedirectView("/cart", true));
     }
 

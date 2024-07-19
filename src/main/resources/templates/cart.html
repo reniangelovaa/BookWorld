@@ -25,7 +25,7 @@
                 <td th:text="${#numbers.formatDecimal(item.book.price * item.quantity, 0, 'COMMA', 2, 'POINT')}">Total
                 </td>
                 <td>
-                    <form th:action="@{/api/cart/remove/{id}(id=${item.id})}" th:method="DELETE">
+                    <form th:action="@{/cart/remove/{cartItemId}(cartItemId=${item.id})}" method="post">
                         <button type="submit">Remove</button>
                     </form>
                 </td>

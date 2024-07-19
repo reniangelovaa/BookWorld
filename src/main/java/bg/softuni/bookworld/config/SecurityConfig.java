@@ -23,7 +23,8 @@ public class SecurityConfig {
                                 authorizeRequests
                                         .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                         .requestMatchers("/", "/about-us", "/users/login", "/users/login-error", "/users/register").permitAll()
-                                        .requestMatchers(HttpMethod.DELETE, "/api/cart/remove/**").authenticated()
+                                        .requestMatchers(HttpMethod.DELETE, "/cart/remove/**").authenticated()
+                                        .requestMatchers(HttpMethod.DELETE, "/book/*/comments/**").authenticated()
                                         .anyRequest().authenticated();
                         }
                 )
@@ -47,8 +48,4 @@ public class SecurityConfig {
                 .build();
     }
 
-    @Bean
-    public AppUserDetailsService userDetailsService(UserRepository userRepository) {
-        return new AppUserDetailsService(userRepository);
-    }
 }
