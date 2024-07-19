@@ -61,14 +61,12 @@ public class ShoppingCartController {
 
     @PostMapping("/add")
     public String addToCart(@RequestParam Long bookId, @RequestParam int quantity, Principal principal, HttpServletRequest request, RedirectAttributes redirectAttributes) {
-        ModelAndView modelAndView = new ModelAndView("book-details");
         Optional<User> optionalUser = userRepository.findByUsername(principal.getName());
         User user = optionalUser.orElseThrow(() -> new ObjectNotFoundException("User", principal.getName()));
         Optional<Book> optionalBook = bookRepository.findById(bookId);
         Book book = optionalBook.orElseThrow(() -> new ObjectNotFoundException("Book", bookId.toString()));
 
         shoppingCartService.addBookToCart(book, quantity, user);
-        modelAndView.addObject("message", "Book added to cart succesfully!");
 
         redirectAttributes.addFlashAttribute("message", "Book added to cart successfully!");
 
