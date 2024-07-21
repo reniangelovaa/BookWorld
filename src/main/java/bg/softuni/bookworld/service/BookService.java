@@ -49,6 +49,11 @@ public class BookService {
 
         Optional<Book> book = bookRepository.findById(randomId);
 
+        while (book.isEmpty()){
+            randomId = random.nextLong(booksCount) + 1;
+            book = bookRepository.findById(randomId);
+        }
+
         return mapToShortInfo(book.get());
     }
     @Transactional
@@ -154,6 +159,14 @@ public class BookService {
 
     public List<CommentDTO> getCommentsByBookId(Long bookId) {
         return commentsClient.getCommentsByBookId(bookId);
+    }
+
+    @Transactional
+    public List<BookShortInfoDTO> getBooksByAuthor(String authorName){
+        return bookRepository.findBooksByAuthor_FullName(authorName)
+                .stream()
+                .map(this::mapToShortInfo)
+                .toList();
     }
 }
 

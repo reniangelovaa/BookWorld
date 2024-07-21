@@ -13,7 +13,9 @@
             <img th:src="${book.imageUrl}" alt="Book Cover" class="book-details-image">
             <div class="book-details-info">
                 <h2 th:text="${book.name}" class="book-title"></h2>
-                <p th:text="${book.author}" class="book-author"></p>
+                <p class="book-author">
+                    <a th:href="@{/shop/author/{authorName}(authorName=${book.author})}" th:text="${book.author}"></a>
+                </p>
                 <p class="book-category">
                     <span th:each="category : ${book.category}" th:text="${category}"></span>
                 </p>

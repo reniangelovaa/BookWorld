@@ -20,4 +20,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findTop5ByOrderByReleaseDateDesc();
     int deleteByCopiesEquals(int numberOfCopies);
+
+    List<Book> findBooksByAuthor_FullName(String authorName);
 }

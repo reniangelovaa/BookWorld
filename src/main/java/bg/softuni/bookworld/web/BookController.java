@@ -89,6 +89,14 @@ public class BookController {
         return "categories/" + category.getName().toString().toLowerCase();
     }
 
+    @GetMapping("shop/author/{authorName}")
+    public String getBooksByAuthor(@PathVariable String authorName, Model model){
+        List<BookShortInfoDTO> booksByAuthor = bookService.getBooksByAuthor(authorName);
+        model.addAttribute("books", booksByAuthor);
+        model.addAttribute("authorName", authorName);
+        return "books-by-author";
+    }
+
 @PostMapping("/book/{bookId}/comments")
 public String addComment(@PathVariable Long bookId, @ModelAttribute CommentDTO commentDto, RedirectAttributes redirectAttributes) {
     commentDto.setBookId(bookId);
