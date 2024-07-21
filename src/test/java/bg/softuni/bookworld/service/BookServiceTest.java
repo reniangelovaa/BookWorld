@@ -220,6 +220,36 @@ public class BookServiceTest {
     }
 
     @Test
+    void testGetBooksByAuthor() {
+        String authorName = "John Doe";
+        Author author = new Author();
+        author.setFullName(authorName);
+
+        Book book1 = new Book();
+        book1.setId(1L);
+        book1.setAuthor(author);
+        book1.setPictures(Set.of(getPicture()));
+
+        Book book2 = new Book();
+        book2.setId(2L);
+        book2.setAuthor(author);
+        book2.setPictures(Set.of(getPicture()));
+
+        BookShortInfoDTO dto1 = getBookShortInfoDTO(1L);
+        BookShortInfoDTO dto2 = getBookShortInfoDTO(2L);
+
+        when(mockBookRepository.findBooksByAuthor_FullName(authorName)).thenReturn(List.of(book1, book2));
+        when(mockModelMapper.map(book1, BookShortInfoDTO.class)).thenReturn(dto1);
+        when(mockModelMapper.map(book2, BookShortInfoDTO.class)).thenReturn(dto2);
+
+        List<BookShortInfoDTO> result = bookService.getBooksByAuthor(authorName);
+
+        assertEquals(2, result.size());
+        assertEquals(dto1, result.get(0));
+        assertEquals(dto2, result.get(1));
+    }
+
+    @Test
     void testAddBook() {
         AddBookDTO dto = new AddBookDTO();
         dto.setAuthor("John Doe");

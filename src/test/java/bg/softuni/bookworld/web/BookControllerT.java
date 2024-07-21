@@ -1,6 +1,7 @@
 package bg.softuni.bookworld.web;
 
 import bg.softuni.bookworld.client.dto.CommentDTO;
+import bg.softuni.bookworld.model.Author;
 import bg.softuni.bookworld.model.Category;
 import bg.softuni.bookworld.model.enums.CategoryType;
 import bg.softuni.bookworld.service.BookService;
@@ -90,6 +91,22 @@ public class BookControllerT {
                 .andExpect(model().attributeExists("category"))
                 .andExpect(model().attribute("books", books))
                 .andExpect(model().attribute("category", category));
+    }
+
+    @Test
+    @WithMockUser(username = "testUser", roles = {"USER"})
+    public void testGetBooksByAuthor() throws Exception {
+        String authorName = "John Doe";
+        List<BookShortInfoDTO> books = Collections.singletonList(new BookShortInfoDTO());
+        when(bookService.getBooksByAuthor(authorName)).thenReturn(books);
+
+        mockMvc.perform(get("/shop/author/" + authorName))
+                .andExpect(status().isOk())
+                .andExpect(view().name("books-by-author"))
+                .andExpect(model().attributeExists("books"))
+                .andExpect(model().attributeExists("authorName"))
+                .andExpect(model().attribute("books", books))
+                .andExpect(model().attribute("authorName", authorName));
     }
 
 }
