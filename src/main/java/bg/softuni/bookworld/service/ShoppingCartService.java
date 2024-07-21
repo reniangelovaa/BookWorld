@@ -26,6 +26,16 @@ public class ShoppingCartService {
     @Autowired
     private UserRepository userRepository;
 
+    public ShoppingCartService(ShoppingCartRepository shoppingCartRepository,
+                               CartItemRepository cartItemRepository,
+                               BookRepository bookRepository,
+                               UserRepository userRepository) {
+        this.shoppingCartRepository = shoppingCartRepository;
+        this.cartItemRepository = cartItemRepository;
+        this.bookRepository = bookRepository;
+        this.userRepository = userRepository;
+    }
+
     public ShoppingCart getShoppingCart(User user) {
         return shoppingCartRepository.findByUser(user);
     }

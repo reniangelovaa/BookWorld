@@ -29,7 +29,6 @@ public class BookService {
     private final PictureRepository pictureRepository;
     private final CommentsClient commentsClient;
 
-
     @Transactional
     public List<BookShortInfoDTO> getAll() {
         return bookRepository.findAll()
@@ -42,6 +41,7 @@ public class BookService {
     @Transactional
     public BookShortInfoDTO getRandomBook() {
         long booksCount = bookRepository.count();
+
         long randomId = random.nextLong(booksCount) + 1;
 
         Optional<Book> book = bookRepository.findById(randomId);
@@ -119,14 +119,6 @@ public class BookService {
                 .stream()
                 .map(this::mapToShortInfo)
                 .toList();
-    }
-
-    public CommentDTO addComment(CommentDTO comment) {
-        return commentsClient.addComment(comment);
-    }
-
-    public void deleteComment(Long id) {
-        commentsClient.deleteComment(id);
     }
 
     public List<CommentDTO> getCommentsByBookId(Long bookId) {
