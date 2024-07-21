@@ -1,14 +1,14 @@
 package bg.softuni.bookworld.web.dto;
 
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,16 +22,22 @@ public class AddBookDTO {
     @NotBlank
     @Size(min = 2)
     private String description;
-    @NotBlank
+    @NotNull
+    @Min(1)
     private Double price;
-    @NotBlank
-    @Min(0)
+    @NotNull
+    @Min(1)
     private int copies;
-    @NotBlank
-    @Min(0)
+    @NotNull
+    @Min(1)
     private Integer numberOfPages;
-    @NotBlank
+    @NotNull
     private LocalDate releaseDate;
+    @NotBlank
     private String imageUrl;
+    @NotNull
+    @NotEmpty
+    private List<String> categories;
+
 
 }

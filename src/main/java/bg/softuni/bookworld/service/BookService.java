@@ -4,8 +4,10 @@ import bg.softuni.bookworld.client.CommentsClient;
 import bg.softuni.bookworld.client.dto.CommentDTO;
 import bg.softuni.bookworld.data.AuthorRepository;
 import bg.softuni.bookworld.data.BookRepository;
+import bg.softuni.bookworld.data.CategoryRepository;
 import bg.softuni.bookworld.data.PictureRepository;
 import bg.softuni.bookworld.model.*;
+import bg.softuni.bookworld.model.enums.CategoryType;
 import bg.softuni.bookworld.service.dto.BookDetailsDTO;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import bg.softuni.bookworld.service.exeption.ObjectNotFoundException;
@@ -28,6 +30,7 @@ public class BookService {
     private final AuthorRepository authorRepository;
     private final PictureRepository pictureRepository;
     private final CommentsClient commentsClient;
+    private final CategoryRepository categoryRepository;
 
     @Transactional
     public List<BookShortInfoDTO> getAll() {
@@ -102,14 +105,42 @@ public class BookService {
             authorRepository.save(author);
         }
         book.setAuthor(author);
-        bookRepository.save(book);
 
-        Picture picture = new Picture();
-        picture.setUrl(data.getImageUrl());
-        picture.setBook(book);
-        book.getPictures().add(picture);
-        pictureRepository.save(picture);
-    // todo picture saving error
+        Set<Category> categories = new HashSet<>();
+        for (String categoryName : data.getCategories()) {
+            CategoryType categoryType;
+            try {
+                categoryType = CategoryType.valueOf(categoryName.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                throw new RuntimeException("Invalid category type: " + categoryName);
+            }
+
+            Optional<Category> categoryOpt = categoryRepository.findByName(categoryType);
+            Category category;
+            if (categoryOpt.isPresent()) {
+                category = categoryOpt.get();
+            } else {
+                Category newCategory = new Category();
+                newCategory.setName(categoryType);
+                category = categoryRepository.save(newCategory);
+            }
+            categories.add(category);
+        }
+        book.setCategories(categories);
+
+        if (data.getImageUrl() != null && !data.getImageUrl().isEmpty()) {
+            Picture picture = new Picture();
+            picture.setUrl(data.getImageUrl());
+            picture.setBook(book);
+            Set<Picture> pictures = new HashSet<>();
+            pictures.add(picture);
+            book.setPictures(pictures);
+
+
+            pictureRepository.save(picture);
+        }
+
+        bookRepository.save(book);
 
     }
 

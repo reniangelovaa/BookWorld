@@ -16,6 +16,6 @@ public class Picture {
     private long id;
     @Column(nullable = false, columnDefinition = "TEXT")
     private String url;
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Book book;
 }

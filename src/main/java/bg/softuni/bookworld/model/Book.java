@@ -32,14 +32,12 @@ public class Book {
     private Author author;
     @ManyToMany
     private Set<Category> categories;
-//    @OneToMany(targetEntity = Comment.class, mappedBy = "book")
-//    private Set<Comment> comments;
+
     @OneToMany(targetEntity = Picture.class, mappedBy = "book", cascade = CascadeType.ALL)
     private Set<Picture> pictures;
 
     public Book() {
         this.categories = new HashSet<>();
-//        this.comments = new HashSet<>();
         this.pictures = new HashSet<>();
     }
 
