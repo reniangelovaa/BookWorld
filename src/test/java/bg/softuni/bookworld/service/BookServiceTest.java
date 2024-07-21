@@ -1,13 +1,18 @@
 package bg.softuni.bookworld.service;
 
+import bg.softuni.bookworld.data.AuthorRepository;
 import bg.softuni.bookworld.data.BookRepository;
+import bg.softuni.bookworld.data.CategoryRepository;
+import bg.softuni.bookworld.data.PictureRepository;
 import bg.softuni.bookworld.model.Author;
 import bg.softuni.bookworld.model.Book;
 import bg.softuni.bookworld.model.Category;
 import bg.softuni.bookworld.model.Picture;
+import bg.softuni.bookworld.model.enums.CategoryType;
 import bg.softuni.bookworld.service.dto.BookDetailsDTO;
 import bg.softuni.bookworld.service.dto.BookShortInfoDTO;
 import bg.softuni.bookworld.service.exeption.ObjectNotFoundException;
+import bg.softuni.bookworld.web.dto.AddBookDTO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,15 +37,19 @@ public class BookServiceTest {
 
     @Mock
     private BookRepository mockBookRepository;
-
     @Mock
     private ModelMapper mockModelMapper;
-
     @InjectMocks
     private BookService bookService;
-
     @Mock
     private Random random;
+    @Mock
+    private AuthorRepository authorRepository;
+    @Mock
+    private CategoryRepository categoryRepository;
+    @Mock
+    private PictureRepository pictureRepository;
+
 
     @BeforeEach
     void setUp() {
@@ -57,6 +66,12 @@ public class BookServiceTest {
         Picture picture = new Picture();
         picture.setUrl("http://example.com/image.jpg");
         return picture;
+    }
+
+    private Category getCategory(CategoryType type) {
+        Category category = new Category();
+        category.setName(type);
+        return category;
     }
 
     private BookShortInfoDTO getBookShortInfoDTO(Long id){
@@ -203,4 +218,50 @@ public class BookServiceTest {
         assertEquals(dto1, result.get(0));
         assertEquals(dto2, result.get(1));
     }
+
+    @Test
+    void testAddBook() {
+        AddBookDTO dto = new AddBookDTO();
+        dto.setAuthor("John Doe");
+        dto.setCategories(List.of("FANTASY", "ROMANCE"));
+        dto.setImageUrl("http://example.com/image.jpg");
+
+        Author author = getAuthor();
+        Category fantasyCategory = getCategory(CategoryType.FANTASY);
+        Category romanceCategory = getCategory(CategoryType.ROMANCE);
+        Book book = new Book();
+
+        when(authorRepository.findByFullName("John Doe")).thenReturn(null);
+        when(authorRepository.save(any(Author.class))).thenReturn(author);
+
+        when(categoryRepository.findByName(CategoryType.FANTASY)).thenReturn(Optional.of(fantasyCategory));
+        when(categoryRepository.findByName(CategoryType.ROMANCE)).thenReturn(Optional.empty());
+        when(categoryRepository.save(any(Category.class))).thenReturn(romanceCategory);
+
+        when(mockModelMapper.map(dto, Book.class)).thenReturn(book);
+        when(mockBookRepository.save(any(Book.class))).thenReturn(book);
+
+        Picture picture = getPicture();
+        when(pictureRepository.save(any(Picture.class))).thenReturn(picture);
+
+        bookService.addBook(dto);
+
+        verify(authorRepository).findByFullName("John Doe");
+        verify(authorRepository).save(any(Author.class));
+
+        verify(categoryRepository).findByName(CategoryType.FANTASY);
+        verify(categoryRepository).findByName(CategoryType.ROMANCE);
+        verify(categoryRepository).save(any(Category.class));
+
+        verify(mockModelMapper).map(dto, Book.class);
+        verify(mockBookRepository).save(any(Book.class));
+        verify(pictureRepository).save(any(Picture.class));
+
+        // Verify the book was set up with the correct categories and pictures
+        assertEquals(Set.of(fantasyCategory, romanceCategory), book.getCategories());
+        assertEquals(1, book.getPictures().size());
+        Picture savedPicture = book.getPictures().iterator().next();
+        assertEquals("http://example.com/image.jpg", savedPicture.getUrl());
+    }
+
 }
